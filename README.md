@@ -13,4 +13,9 @@ To properly run the frontend envirronment, you'll need to install Node in your d
 Once in the frontend folder, run the following commands to install the libraries and dependencies:
 
 - npm i (install every dependency listed in the package.json file)
-- npm start (to run de localhost server for the frontend)
+
+# To run the API, run the next command from the root directory of this repo:
+- py manage.py runserver
+
+# To run the front-end, run the next command from the frontend directory of this repo:
+- npm start
