@@ -3,7 +3,8 @@ from . import views
 
 urlpatterns = [
     path('register/', views.register, name='register'),
-
+    path('login/', views.login, name='login'),
+    path('logout/', views.logout_f, name='logout'),
     # API's
     path('', views.index, name="index"),
     path('all-posts/', views.allPosts, name="allPosts"),

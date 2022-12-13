@@ -13,7 +13,6 @@ from .serializers import PostSerializer, ProfileSerializer, LikeSerializer, Disl
 # Register API
 
 
-@api_view(['POST'])
 def register(request):
     username = request.data["username"]
     email = request.data["email"]
@@ -30,6 +29,23 @@ def register(request):
         return Response("Username already taken")
     login(request, user)
     return Response("logged in")
+
+
+def login(request):
+    username = request.data["username"]
+    password = request.data["password"]
+    user = authenticate(request, username=username, password=password)
+
+    if user is not None:
+        login(request, user)
+        return Response("logged in")
+    else:
+        return Response("Invalid username/password")
+
+
+def logout_f(request):
+    logout(request)
+    return Response("boom")
 
 
 @api_view(['GET'])
