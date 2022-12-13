@@ -3,65 +3,28 @@
 from django.shortcuts import render
 # from django.urls import reverse
 # from django.core.serializers import serialize
-# from rest_framework.response import Response
-# from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from .models import Post, Profile, Like, Dislike, Comment
+from .serializers import PostSerializer, ProfileSerializer
 
 # from .serializers import *
 
 
+@api_view(['GET'])
 def index(request):
-    return render(request, "forum/index.html")
+    return Response({"Hello": "World!"})
 
 
-# def login_view(request):
-#     if request.method == "POST":
-
-#         # Attempt to sign user in
-#         username = request.POST["username"]
-#         password = request.POST["password"]
-#         user = authenticate(request, username=username, password=password)
-
-#         # Check if authentication successful
-#         if user is not None:
-#             login(request, user)
-#             return HttpResponseRedirect(reverse("index"))
-#         else:
-#             return render(request, "forum/login.html", {
-#                 "message": "Invalid username and/or password."
-#             })
-#     else:
-#         return render(request, "forum/login.html")
+@api_view(['GET'])
+def allPosts(request):
+    posts = Post.objects.all().order_by('-timestamp')
+    serializer = PostSerializer(posts, many=True)
+    return Response(serializer.data)
 
 
-# def logout_view(request):
-#     logout(request)
-#     return HttpResponseRedirect(reverse("index"))
-
-
-# def register(request):
-#     if request.method == "POST":
-#         username = request.POST["username"]
-#         email = request.POST["email"]
-
-#         # Ensure password matches confirmation
-#         password = request.POST["password"]
-#         confirmation = request.POST["confirmation"]
-#         if password != confirmation:
-#             return render(request, "forum/register.html", {
-#                 "message": "Passwords must match."
-#             })
-
-#         # Attempt to create new user
-#         try:
-#             user = User.objects.create_user(username, email, password)
-#             profile = Profile(user=user)
-#             user.save()
-#             profile.save()
-#         except IntegrityError:
-#             return render(request, "network/register.html", {
-#                 "message": "Username already taken."
-#             })
-#         login(request, user)
-#         return HttpResponseRedirect(reverse("index"))
-#     else:
-#         return render(request, "forum/register.html")
+@api_view(['GET'])
+def allProfiles(request):
+    profiles = Profile.objects.all()
+    serializer = ProfileSerializer(profiles, many=True)
+    return Response(serializer.data)
