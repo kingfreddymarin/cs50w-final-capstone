@@ -4,15 +4,18 @@ from django.contrib.auth import authenticate, login, logout
 
 # from django.urls import reverse
 # from django.core.serializers import serialize
-from knox.models import AuthToken
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .models import Post, Profile, Like, Dislike, Comment, User
 from .serializers import PostSerializer, ProfileSerializer, LikeSerializer, DislikeSerializer, CommentSerializer
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
+
 
 # Register API
 
 
+@api_view(["POST"])
 def register(request):
     username = request.data["username"]
     email = request.data["email"]
@@ -31,6 +34,7 @@ def register(request):
     return Response("logged in")
 
 
+@api_view(["POST"])
 def login(request):
     username = request.data["username"]
     password = request.data["password"]
