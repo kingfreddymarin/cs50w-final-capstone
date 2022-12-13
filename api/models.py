@@ -25,6 +25,7 @@ class Profile(models.Model):
         "User", on_delete=models.CASCADE, related_name="userProfile")
     ctg_following = models.ManyToManyField(
         "Category", related_name="categoriesFollowing", null=True, blank=True)
+    isTeacher = models.BooleanField(default=False)
 
     def __str__(self):
         return str(self.user)

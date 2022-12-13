@@ -20,7 +20,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile
-        fields = ('id', 'user', 'ctg_following')
+        fields = ('id', 'user', 'ctg_following', 'isTeacher')
 
 
 class LikeSerializer(serializers.ModelSerializer):
