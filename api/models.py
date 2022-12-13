@@ -39,6 +39,7 @@ class Post(models.Model):
         "Profile", on_delete=models.PROTECT, related_name="postCreator", null=True, blank=True)
     categories = models.ManyToManyField(
         "Category", related_name="postCategories", null=True, blank=True)
+    title = models.CharField(max_length=50, default="")
     content = models.TextField(max_length=750, default="")
     timestamp = models.DateTimeField(auto_now_add=True)
     isActive = models.BooleanField(default=True)
