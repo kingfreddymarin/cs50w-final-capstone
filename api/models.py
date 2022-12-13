@@ -35,20 +35,16 @@ class Profile(models.Model):
 
 class Post(models.Model):
     isStudent = models.BooleanField(default=False)
-    content = models.TextField(max_length=750, default="")
-    timestamp = models.DateTimeField(auto_now_add=True)
-    likes = models.ManyToManyField(
-        "Profile", related_name="likedPost", null=True, blank=True)
-    dislikes = models.ManyToManyField(
-        "Profile", related_name="dislikedPost", null=True, blank=True)
     creator = models.ForeignKey(
         "Profile", on_delete=models.PROTECT, related_name="postCreator", null=True, blank=True)
     categories = models.ManyToManyField(
         "Category", related_name="postCategories", null=True, blank=True)
+    content = models.TextField(max_length=750, default="")
+    timestamp = models.DateTimeField(auto_now_add=True)
     isActive = models.BooleanField(default=True)
 
     def __str__(self):
-        return f"post by {self.creator}"
+        return f"post by {self.creator} {self.timestamp}"
 
 
 # Create likes, dislikes, comments and
