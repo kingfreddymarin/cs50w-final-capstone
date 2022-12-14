@@ -1,15 +1,15 @@
 # from django.contrib.auth import authenticate, login, logout
 # from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
-from django.contrib.auth import authenticate, login, logout
 
 # from django.urls import reverse
 # from django.core.serializers import serialize
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+from rest_framework.authtoken.serializers import AuthTokenSerializer
+from knox.auth import AuthToken
+
 from .models import Post, Profile, Like, Dislike, Comment, User
-from .serializers import PostSerializer, ProfileSerializer, LikeSerializer, DislikeSerializer, CommentSerializer
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication
-from rest_framework.permissions import IsAuthenticated
+from .serializers import PostSerializer, ProfileSerializer, LikeSerializer, DislikeSerializer, CommentSerializer, RegisterSerializers
 
 
 # Register API
@@ -17,39 +17,54 @@ from rest_framework.permissions import IsAuthenticated
 
 @api_view(["POST"])
 def register(request):
-    username = request.data["username"]
-    email = request.data["email"]
-    password = request.data["password"]
-    confirmation = request.data["confirmation"]
-    if password != confirmation:
-        return Response("password must match its confirmation")
-    try:
-        user = User.objects.create_user(username, email, password)
-        profile = Profile(user=user)
-        user.save()
-        profile.save()
-    except:
-        return Response("Username already taken")
-    login(request, user)
-    return Response("logged in")
+    serializer = RegisterSerializers(data=request.data)
+    serializer.is_valid(raise_exception=True)
+
+    user = serializer.save()
+    _, token = AuthToken.objects.create(user)
+
+    return Response({
+        'user_info': {
+            'id': user.id,
+            'username': user.username,
+            'email': user.email
+        },
+        'token': token
+    })
 
 
 @api_view(["POST"])
 def login(request):
-    username = request.data["username"]
-    password = request.data["password"]
-    user = authenticate(request, username=username, password=password)
+    serializer = AuthTokenSerializer(data=request.data)
+    serializer.is_valid(raise_exception=True)
+    user = serializer.validated_data['user']
 
-    if user is not None:
-        login(request, user)
-        return Response("logged in")
-    else:
-        return Response("Invalid username/password")
+    _, token = AuthToken.objects.create(user)
+    return Response({
+        'user_info': {
+            'id': user.id,
+            'username': user.username,
+            'email': user.email
+        },
+        'token': token
+    })
 
 
-def logout_f(request):
-    logout(request)
-    return Response("boom")
+@api_view(['GET'])
+def get_user_data(request):
+    user = request.user
+
+    if user.is_authenticated:
+        return Response({
+            'user_info': {
+                'id': user.id,
+                'username': user.username,
+                'email': user.email
+            },
+        })
+    return Response({
+        'error': "not authenticated"
+    }, status=400)
 
 
 @api_view(['GET'])

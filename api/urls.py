@@ -1,10 +1,14 @@
 from django.urls import path
+from knox import views as knox_views
 from . import views
 
 urlpatterns = [
     path('register/', views.register, name='register'),
     path('login/', views.login, name='login'),
-    path('logout/', views.logout_f, name='logout'),
+    path('user/', views.get_user_data, name="user"),
+    path('logout/', knox_views.LogoutView.as_view(), name="user"),
+    # This route will work to log out the users from any device
+    # path('logout-all/', knox_views.LogoutAllView.as_view(), name="user"),
     # API's
     path('', views.index, name="index"),
     path('all-posts/', views.allPosts, name="allPosts"),

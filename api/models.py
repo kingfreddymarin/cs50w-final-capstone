@@ -22,7 +22,7 @@ class Category(models.Model):
 
 class Profile(models.Model):
     user = models.ForeignKey(
-        "User", on_delete=models.CASCADE, related_name="userProfile")
+        "User", on_delete=models.CASCADE, related_name="userProfile", null=True, blank=True)
     ctg_following = models.ManyToManyField(
         "Category", related_name="categoriesFollowing", null=True, blank=True)
     isTeacher = models.BooleanField(default=False)
