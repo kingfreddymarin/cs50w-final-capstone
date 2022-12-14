@@ -19,9 +19,13 @@ from .serializers import PostSerializer, ProfileSerializer, LikeSerializer, Disl
 def register(request):
     serializer = RegisterSerializers(data=request.data)
     serializer.is_valid(raise_exception=True)
-
     user = serializer.save()
     _, token = AuthToken.objects.create(user)
+
+    profile = Profile(
+        user=user
+    )
+    profile.save()
 
     return Response({
         'user_info': {
