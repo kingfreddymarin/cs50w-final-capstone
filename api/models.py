@@ -46,7 +46,7 @@ class Post(models.Model):
     isActive = models.BooleanField(default=True)
 
     def __str__(self):
-        return f"post by {self.creator} {self.timestamp}"
+        return f"post by {self.creator}: {self.title}"
 
 
 # Create likes, dislikes, comments and
