@@ -9,6 +9,10 @@ const Login = () => {
    const [password, setPassword] = useState("")
 
    const handleLogin = () => {
+      if (!username || !password) {
+         alert("No blanks!")
+         return
+      }
       Axios.post('http://localhost:8000/login/', {
          username: username,
          password: password
@@ -18,7 +22,8 @@ const Login = () => {
          window.localStorage.setItem("isLoggedIn", "true")
          document.location.reload()
       }).catch(function (error) {
-         console.log(error);
+         console.log(error)
+         error.response.data.non_field_errors ? alert(error.response.data.non_field_errors) : console.log('credentials are okay')
       });
    }
    return (
@@ -56,7 +61,7 @@ const Login = () => {
                                     <button onClick={handleLogin} type="button" className="btn btn-dark btn-lg">Login</button>
                                  </div>
                                  <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                                    don't have an account yet?
+                                    Don't have an account yet?
                                  </div>
                                  <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                                     <Link to='/register'>

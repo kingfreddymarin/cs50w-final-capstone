@@ -13,6 +13,14 @@ const Register = () => {
    const [confirmation, setConfirmation] = useState("")
 
    const handleRegister = () => {
+      if (!name || !lastName || !email || !username || !password || !confirmation) {
+         alert("No blanks!")
+         return
+      }
+      if (password !== confirmation) {
+         alert("passwords must match")
+         return
+      }
       axios.post('http://localhost:8000/register/', {
          first_name: name,
          last_name: lastName,
@@ -24,7 +32,9 @@ const Register = () => {
          window.localStorage.setItem("token", token)
          document.location.reload()
       }).catch(function (error) {
-         alert(error);
+         console.log(error)
+         error.response.data.username ? alert(error.response.data.username) : console.log("username passed")
+         error.response.data.email ? alert(error.response.data.email) : console.log("email passed")
       });
    }
 
