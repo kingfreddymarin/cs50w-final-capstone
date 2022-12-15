@@ -23,6 +23,7 @@ function App() {
       }).then(function (response) {
         console.log(response);
         const user = response.data.user_info
+        const id = response.data.user_info.id
         setLoggedUser(user)
         setIsValid(true)
       }).catch(function (error) {
@@ -39,7 +40,6 @@ function App() {
         <Route path="/" element={isValid ? <Layout /> : <Login />}>
           <Route index element={<Home />} />
           <Route path="/profile" element={<Profile currentUser={loggedUser} />} />
-
           {/* <Route path="*" element={<NoPage />} /> */}
         </Route>
         <Route path="/register" element={!isValid ? <Register /> : <Redirect />} />
