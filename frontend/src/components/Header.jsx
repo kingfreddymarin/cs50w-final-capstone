@@ -1,8 +1,6 @@
 // import logo from '../assets/logos/logo.jpg'
 import axios from "axios";
-import { useState } from "react";
 import { FaWolfPackBattalion } from "react-icons/fa";
-import { Link } from "react-router-dom";
 
 
 const Header = () => {
@@ -22,8 +20,8 @@ const Header = () => {
       });
    }
    return (
-      <nav class="navbar navbar-dark bg-dark bg-light">
-         <a class="navbar-brand" href="#">
+      <nav className="navbar navbar-dark bg-dark bg-light">
+         <a className="navbar-brand" href="#">
             <FaWolfPackBattalion />
             WOLFTECH
          </a>

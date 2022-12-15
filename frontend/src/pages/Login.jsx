@@ -8,7 +8,6 @@ const Login = () => {
    const [username, setUsername] = useState("")
    const [password, setPassword] = useState("")
 
-
    const handleLogin = () => {
       Axios.post('http://localhost:8000/login/', {
          username: username,
@@ -18,9 +17,6 @@ const Login = () => {
          window.localStorage.setItem("token", token)
          window.localStorage.setItem("isLoggedIn", "true")
          document.location.reload()
-         // window.localStorage.removeItem("token")
-         // window.localStorage.removeItem("isLoggedIn")
-
       }).catch(function (error) {
          console.log(error);
       });
@@ -35,7 +31,7 @@ const Login = () => {
                         <div className="row justify-content-center">
                            <div className="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
                               <div className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4 d-flex align-items-center justify-content-center">Login |
-                                 <div class="navbar-brand ml-1 mt-2" href="#">
+                                 <div className="navbar-brand ml-1 mt-2" href="#">
                                     <FaWolfPackBattalion />
                                     WOLFTECH
                                  </div>

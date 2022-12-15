@@ -1,4 +1,34 @@
+import { useState } from "react";
+import { FaWolfPackBattalion } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import axios from 'axios'
+
 const Register = () => {
+   const [name, setName] = useState("")
+   const [lastName, setLastName] = useState("")
+   const [email, setEmail] = useState("")
+   const [username, setUsername] = useState("")
+   const [password, setPassword] = useState("")
+   const [confirmation, setConfirmation] = useState("")
+   const navigate = useNavigate()
+
+   const handleRegister = () => {
+      axios.post('http://localhost:8000/register/', {
+         first_name: name,
+         last_name: lastName,
+         username: username,
+         password: password,
+         email: email,
+      }).then(function (response) {
+         const token = `Token ${response.data.token}`
+         window.localStorage.setItem("token", token)
+         document.location.reload()
+      }).catch(function (error) {
+         alert(error);
+      });
+   }
+
+
    return (
       <section className="vh-100" style={{ backgroundColor: "#eee" }}>
          <div className="container h-100">
@@ -8,52 +38,57 @@ const Register = () => {
                      <div className="card-body p-md-5">
                         <div className="row justify-content-center">
                            <div className="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
-                              <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Register</p>
+                              <div className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4 d-flex justify-content-center align-items-center">Register |
+                                 <div className="navbar-brand ml-1 mt-2" href="#">
+                                    <FaWolfPackBattalion />
+                                    WOLFTECH
+                                 </div>
+                              </div>
                               <form className="mx-1 mx-md-4">
                                  <div className="d-flex flex-row align-items-center mb-4">
                                     <i className="fas fa-user fa-lg me-3 fa-fw"></i>
                                     <div className="form-outline flex-fill mb-0">
-                                       <input type="text" id="form3Example1c" className="form-control" />
-                                       <label className="form-label" for="form3Example1c">Name</label>
+                                       <input onChange={(e) => setName(e.target.value)} type="text" id="name" className="form-control" />
+                                       <label value={name} className="form-label" htmlFor="name">Name</label>
                                     </div>
                                  </div>
                                  <div className="d-flex flex-row align-items-center mb-4">
                                     <i className="fas fa-user fa-lg me-3 fa-fw"></i>
                                     <div className="form-outline flex-fill mb-0">
-                                       <input type="text" id="form3Example1c" className="form-control" />
-                                       <label className="form-label" for="form3Example1c">Last name</label>
+                                       <input onChange={(e) => setLastName(e.target.value)} value={lastName} type="text" id="lastName" className="form-control" />
+                                       <label className="form-label" htmlFor="lastName">Last name</label>
                                     </div>
                                  </div>
                                  <div className="d-flex flex-row align-items-center mb-4">
                                     <i className="fas fa-user fa-lg me-3 fa-fw"></i>
                                     <div className="form-outline flex-fill mb-0">
-                                       <input type="text" id="form3Example1c" className="form-control" />
-                                       <label className="form-label" for="form3Example1c">Username</label>
+                                       <input onChange={(e) => setUsername(e.target.value)} value={username} type="text" id="username" className="form-control" />
+                                       <label className="form-label" htmlFor="username">Username</label>
                                     </div>
                                  </div>
                                  <div className="d-flex flex-row align-items-center mb-4">
                                     <i className="fas fa-user fa-lg me-3 fa-fw"></i>
                                     <div className="form-outline flex-fill mb-0">
-                                       <input type="text" id="form3Example1c" className="form-control" />
-                                       <label className="form-label" for="form3Example1c">Email</label>
+                                       <input onChange={(e) => setEmail(e.target.value)} value={email} type="text" id="email" className="form-control" />
+                                       <label className="form-label" htmlFor="email">Email</label>
                                     </div>
                                  </div>
                                  <div className="d-flex flex-row align-items-center mb-4">
                                     <i className="fas fa-lock fa-lg me-3 fa-fw"></i>
                                     <div className="form-outline flex-fill mb-0">
-                                       <input type="password" id="form3Example4c" className="form-control" />
-                                       <label className="form-label" for="form3Example4c">Password</label>
+                                       <input onChange={(e) => setPassword(e.target.value)} value={password} type="password" id="password" className="form-control" />
+                                       <label className="form-label" htmlFor="password">Password</label>
                                     </div>
                                  </div>
                                  <div className="d-flex flex-row align-items-center mb-4">
                                     <i className="fas fa-lock fa-lg me-3 fa-fw"></i>
                                     <div className="form-outline flex-fill mb-0">
-                                       <input type="password" id="form3Example4c" className="form-control" />
-                                       <label className="form-label" for="form3Example4c">Confirm Password</label>
+                                       <input onChange={(e) => setConfirmation(e.target.value)} value={confirmation} type="password" id="confirmation" className="form-control" />
+                                       <label className="form-label" htmlFor="confirmation">Confirm Password</label>
                                     </div>
                                  </div>
                                  <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                                    <button type="button" className="btn btn-dark btn-lg">Register</button>
+                                    <button onClick={handleRegister} type="button" className="btn btn-dark btn-lg">Register</button>
                                  </div>
                               </form>
                            </div>

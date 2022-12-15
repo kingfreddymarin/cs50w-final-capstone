@@ -1,12 +1,12 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useEffect } from "react";
+import axios from "axios";
 import Layout from "../pages/Layout";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
-import { useState } from "react";
-import { useEffect } from "react";
-import axios from "axios";
-
+import Redirect from "../pages/Redirect"
 
 function App() {
   const token = window.localStorage.getItem("token")
@@ -34,8 +34,7 @@ function App() {
           <Route index element={<Home />} />
           {/* <Route path="*" element={<NoPage />} /> */}
         </Route>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/register" element={!isValid ? <Register /> : <Redirect />} />
       </Routes>
     </BrowserRouter>
   );
