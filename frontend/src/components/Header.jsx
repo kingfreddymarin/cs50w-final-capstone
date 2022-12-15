@@ -1,6 +1,7 @@
 // import logo from '../assets/logos/logo.jpg'
 import axios from "axios";
 import { FaWolfPackBattalion } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 
 const Header = () => {
@@ -31,9 +32,11 @@ const Header = () => {
             </button>
             <div className="collapse navbar-collapse" id="navbarNav">
                <ul className="navbar-nav">
-                  <li className="nav-item">
-                     <a className="nav-link" href="#">My profile</a>
-                  </li>
+                  <Link to="/profile">
+                     <li className="nav-item">
+                        <a className="nav-link" href="#">My profile</a>
+                     </li>
+                  </Link>
                   <li className="nav-item">
                      <a className="nav-link" href="#">Home</a>
                   </li>

@@ -7,6 +7,8 @@ import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Redirect from "../pages/Redirect"
+import Profile from "../pages/Profile"
+
 
 function App() {
   const token = window.localStorage.getItem("token")
@@ -36,6 +38,8 @@ function App() {
       <Routes>
         <Route path="/" element={isValid ? <Layout /> : <Login />}>
           <Route index element={<Home />} />
+          <Route path="/profile" element={<Profile currentUser={loggedUser} />} />
+
           {/* <Route path="*" element={<NoPage />} /> */}
         </Route>
         <Route path="/register" element={!isValid ? <Register /> : <Redirect />} />
