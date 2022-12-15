@@ -38,7 +38,7 @@ const Register = () => {
                      <div className="card-body p-md-5">
                         <div className="row justify-content-center">
                            <div className="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
-                              <div className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4 d-flex justify-content-center align-items-center">Register |
+                              <div className="text-center h1 fw-bold mb-5 mx-md-4 mt-4 d-flex justify-content-center align-items-center">Register |
                                  <div className="navbar-brand ml-1 mt-2" href="#">
                                     <FaWolfPackBattalion />
                                     WOLFTECH
