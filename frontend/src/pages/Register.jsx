@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { FaWolfPackBattalion } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from 'axios'
 
 const Register = () => {
@@ -10,7 +11,6 @@ const Register = () => {
    const [username, setUsername] = useState("")
    const [password, setPassword] = useState("")
    const [confirmation, setConfirmation] = useState("")
-   const navigate = useNavigate()
 
    const handleRegister = () => {
       axios.post('http://localhost:8000/register/', {
@@ -89,6 +89,14 @@ const Register = () => {
                                  </div>
                                  <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                                     <button onClick={handleRegister} type="button" className="btn btn-dark btn-lg">Register</button>
+                                 </div>
+                                 <div className="d-flex justify-content-center mx-4 mb-1 mb-lg-4">
+                                    Already have an account?
+                                 </div>
+                                 <div className="d-flex justify-content-center  mb-3 mb-lg-4">
+                                    <Link to='/'>
+                                       <button type="button" className="btn btn-dark btn-lg">Login</button>
+                                    </Link>
                                  </div>
                               </form>
                            </div>

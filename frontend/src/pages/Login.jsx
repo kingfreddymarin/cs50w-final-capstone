@@ -56,7 +56,7 @@ const Login = () => {
                                     <button onClick={handleLogin} type="button" className="btn btn-dark btn-lg">Login</button>
                                  </div>
                                  <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                                    or
+                                    don't have an account yet?
                                  </div>
                                  <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                                     <Link to='/register'>

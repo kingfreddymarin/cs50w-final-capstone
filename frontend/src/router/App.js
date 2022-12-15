@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
@@ -10,7 +10,7 @@ import Redirect from "../pages/Redirect"
 
 function App() {
   const token = window.localStorage.getItem("token")
-  const [isValid, setIsValid] = useState(true)
+  const [isValid, setIsValid] = useState(null)
   useEffect(() => {
     axios
       .get("http://localhost:8000/user/", {
