@@ -1,38 +1,48 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { FaThumbsDown, FaThumbsUp } from "react-icons/fa";
+
 import Axios from 'axios'
-import { useState } from "react";
+
 
 const Home = () => {
    const [posts, setPosts] = useState([])
 
    useEffect(() => {
-      Axios.get('http://localhost:8000/all-posts/')
-         .then(function (response) {
-            response.data.map((post) => {
-               Axios.post('http://localhost:8000/postData/', {
-                  post_id: post.id
-               }).then(function (response) {
-                  post = {
-                     ...post,
-                     likes: response.data.likes,
-                     dislikes: response.data.dislikes,
-                     comments: response.data.comments
-                  }
-                  console.log(post)
-                  setPosts([...posts, post])
+      const fetchData = async () => {
+         try {
+            Axios.get('http://localhost:8000/all-posts/')
+               .then(function (response) {
+                  const postArray = response.data
+                  postArray.forEach((post) => {
+                     let newPost = {}
+                     Axios.post('http://localhost:8000/postData/', {
+                        post_id: post.id
+                     }).then(function (response) {
+                        newPost = {
+                           ...post,
+                           likes: response.data.likes,
+                           dislikes: response.data.dislikes,
+                           comments: response.data.comments
+                        }
+                        setPosts(posts => [...posts, newPost])
+                     }).catch(function (error) {
+                        console.log(error)
+                     });
+                  })
                }).catch(function (error) {
-                  console.log(error)
+                  console.log(error);
                });
-            })
-         }).catch(function (error) {
-            console.log(error);
-         });
+         } catch (error) {
+            console.error(error)
+         }
+      }
+      fetchData()
    }, [])
 
    return (<div className="home-container">
       <div className="inner-main">
          {posts.map((post) => {
-            const { id, content, title } = post
+            const { id, content, title, likes, dislikes, comments } = post
             return (
                <div key={id} className="inner-main-body p-2 p-sm-3 forum-content show">
                   <div className="card mb-2">
@@ -44,10 +54,10 @@ const Home = () => {
                                  {content.substring(0, 144)}...
                               </p>
                            </div>
-                           <div className="text-muted small text-center align-self-center">
-                              <span className="d-none d-sm-inline-block"> Likes: </span>
-                              <span className="d-none d-sm-inline-block ml-2"> Dislikes: </span>
-                              <span><i className="far fa-comment ml-2"></i> </span>
+                           <div className="text-muted small text-center align-self-center align-items-center">
+                              <span className="d-none d-sm-inline-block"> <FaThumbsUp /> {likes.length} </span>
+                              <span className="d-none d-sm-inline-block ml-2"> <FaThumbsDown /> {dislikes.length}</span>
+                              <span><i className="far fa-comment ml-2"></i>{comments.length}</span>
                            </div>
                         </div>
                      </div>
