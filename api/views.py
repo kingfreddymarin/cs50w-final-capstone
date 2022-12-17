@@ -119,6 +119,40 @@ def allPosts(request):
     return Response(serializer.data)
 
 
+@api_view(['POST'])
+def postData(request):
+    data = request.data
+    try:
+        likes_raw = Like.objects.get(post=data["post_id"])
+        one_like = LikeSerializer(likes_raw).data
+        likes = [one_like]
+    except:
+        likes_raw = Like.objects.filter(post=data["post_id"])
+        likes = LikeSerializer(likes_raw, many=True).data
+
+    try:
+        dislikes_raw = Dislike.objects.get(post=data["post_id"])
+        one_dislike = DislikeSerializer(dislikes_raw).data
+        dislikes = [one_dislike]
+    except:
+        dislikes_raw = Dislike.objects.filter(post=data["post_id"])
+        dislikes = DislikeSerializer(dislikes_raw, many=True).data
+
+    try:
+        comments_raw = Comment.objects.get(post=data["post_id"])
+        one_comment = CommentSerializer(comments_raw).data
+        comments = [one_comment]
+    except:
+        comments_raw = Comment.objects.filter(post=data["post_id"])
+        comments = CommentSerializer(comments_raw, many=True).data
+    # comments = Comment.objects.get()
+    return Response({
+        "likes": likes,
+        "dislikes": dislikes,
+        "comments": comments
+    })
+
+
 @api_view(['GET'])
 def allProfiles(request):
     profiles = Profile.objects.all()
