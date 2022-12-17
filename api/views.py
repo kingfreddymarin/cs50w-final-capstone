@@ -59,11 +59,47 @@ def get_user_data(request):
     user = request.user
 
     if user.is_authenticated:
+        profile_raw = Profile.objects.get(user=user)
+        profile = ProfileSerializer(profile_raw)
+
+        # Get the Dislikes
+        try:
+            dislikes_raw = Dislike.objects.get(profile=profile_raw)
+            one_dislike = DislikeSerializer(dislikes_raw).data
+            dislikes = [one_dislike]
+        except:
+            dislikes_raw = Dislike.objects.filter(profile=profile_raw)
+            dislikes = DislikeSerializer(dislikes_raw, many=True).data
+
+        # Get the likes
+        try:
+            likes_raw = Like.objects.get(profile=profile_raw)
+            one_like = LikeSerializer(likes_raw).data
+            likes = [one_like]
+        except:
+            likes_raw = Like.objects.filter(profile=profile_raw)
+            likes = LikeSerializer(likes_raw, many=True).data
+
+        # get the comments
+        try:
+            comments_raw = Comment.objects.get(profile=profile_raw)
+            one_comment = CommentSerializer(comments_raw).data
+            comments = [one_comment]
+        except:
+            comments_raw = Comment.objects.get(profile=profile_raw)
+            comments = CommentSerializer(comments_raw, many=True).data
+
         return Response({
             'user_info': {
                 'id': user.id,
                 'username': user.username,
-                'email': user.email
+                'email': user.email,
+                'first_name': user.first_name,
+                "last_name": user.last_name,
+                "profile_data": profile.data,
+                "likes": likes,
+                "dislikes": dislikes,
+                "comments": comments,
             },
         })
     return Response({
