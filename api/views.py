@@ -86,7 +86,7 @@ def get_user_data(request):
             one_comment = CommentSerializer(comments_raw).data
             comments = [one_comment]
         except:
-            comments_raw = Comment.objects.get(profile=profile_raw)
+            comments_raw = Comment.objects.filter(profile=profile_raw)
             comments = CommentSerializer(comments_raw, many=True).data
 
         return Response({

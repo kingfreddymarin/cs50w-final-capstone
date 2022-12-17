@@ -9,6 +9,10 @@ const Login = () => {
    const [password, setPassword] = useState("")
 
    const handleLogin = () => {
+      console.log({
+         username: username,
+         password: password
+      })
       if (!username || !password) {
          alert("No blanks!")
          return

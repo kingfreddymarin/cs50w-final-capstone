@@ -26,7 +26,7 @@ class RegisterSerializers(serializers.ModelSerializer):
         first_name = validated_data.get('first_name')
         last_name = validated_data.get('last_name')
 
-        user = User.objects.create(
+        user = User.objects.create_user(
             username=username,
             password=password,
             email=email,
