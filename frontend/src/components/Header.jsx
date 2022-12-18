@@ -32,11 +32,6 @@ const Header = () => {
             </button>
             <div className="collapse navbar-collapse" id="navbarNav">
                <ul className="navbar-nav">
-                  <Link to="/profile">
-                     <li className="nav-item">
-                        <a className="nav-link" href="#">My profile</a>
-                     </li>
-                  </Link>
                   <Link to="/">
                      <li className="nav-item">
                         <a className="nav-link" href="#">Home</a>
@@ -46,10 +41,15 @@ const Header = () => {
                      <a className="nav-link" href="#">My Feed</a>
                   </li>
                   <li className="nav-item">
-                     <a className="nav-link" href="#">Notifications</a>
-                  </li>
-                  <li className="nav-item">
                      <a className="nav-link" href="#">Comunity</a>
+                  </li>
+                  <Link to="/profile">
+                     <li className="nav-item">
+                        <a className="nav-link" href="#">My profile</a>
+                     </li>
+                  </Link>
+                  <li className="nav-item">
+                     <a className="nav-link" href="#">Notifications</a>
                   </li>
                   <li className="nav-item">
                      <a onClick={handleLogout} className="nav-link" href="#">Log out</a>
