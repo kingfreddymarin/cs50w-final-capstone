@@ -17,7 +17,7 @@ To properly run the API, you need to install the following pip packages:
 ## THE FRONTEND:
 
 #### Developed with React for the UI and Nodejs for the libraries and packages.
-To properly run the frontend environment, you'll first need to install (Node)[https://nodejs.org/en/download/] in your device. Then navigate with youtr favorite terminal to the 'frontend' folder in the root of this project.
+To properly run the frontend environment, you'll first need to install [Node](https://nodejs.org/en/download/) in your device. Then navigate with youtr favorite terminal to the 'frontend' folder in the root of this project.
 
 Once in the 'frontend' folder, run the following commands to install the libraries and packages:
 
