@@ -1,10 +1,11 @@
-# FINAL PROJECT
+# FINAL PROJECT - WOLFTECH FORUM
 
 ## THE BACKEND:
 
-#### Developed in Django, using SQLite as a database, Django Rest Framework for API's management, Knox for security for the users and Django Cors Headers to be able to access the API from a different server (localhost:3000 <- frontend's server). 
+#### Developed in Django, using SQLite as a database, Django Rest Framework for API's management, Knox for security for the users and Django Cors Headers to be able to access the API from a different server (localhost:3000 <- frontend's server).
 
 To properly run the API, you need to install the following pip packages:
+
 - py -m pip install Django
 - py -m pip install djangorestframework
 - py -m pip install django-rest-knox
@@ -17,6 +18,7 @@ To properly run the API, you need to install the following pip packages:
 ## THE FRONTEND:
 
 #### Developed with React for the UI and Nodejs for the libraries and packages.
+
 To properly run the frontend environment, you'll first need to install [Node](https://nodejs.org/en/download/) in your device. Then navigate with youtr favorite terminal to the 'frontend' folder in the root of this project.
 
 Once in the 'frontend' folder, run the following commands to install the libraries and packages:
