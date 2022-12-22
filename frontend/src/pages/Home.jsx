@@ -42,14 +42,27 @@ const Home = () => {
    return (<div className="home-container">
       <div className="inner-main">
          {posts.map((post) => {
-            const { id, content, title, likes, dislikes, comments } = post
+            const { id, content, title, likes, dislikes, comments, categories } = post
+            console.log(categories)
             return (
                <div key={id} className="inner-main-body p-2 p-sm-3 forum-content show">
                   <div className="card mb-2">
                      <div className="card-body p-2 p-sm-3">
                         <div className="media forum-item">
                            <div className="media-body">
-                              <h6><a href="#" data-target=".forum-content" className="text-body">{title}</a></h6>
+                              <div className="">
+                                 <h6><a href="#" data-target=".forum-content" className="text-body">{title}</a></h6>
+                                 <section className="category-conteiner d-flex">
+                                    {categories.map((category) => {
+                                       return (
+                                          <div key={category.id}>
+                                             <span class="badge badge-secondary mr-2">{category}</span>
+                                          </div>
+                                       )
+                                    })}
+
+                                 </section>
+                              </div>
                               <p className="text-secondary">
                                  {content.substring(0, 144)}...
                               </p>

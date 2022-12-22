@@ -41,7 +41,7 @@ class PostSerializer(serializers.ModelSerializer):
     # creator = serializers.ReadOnlyField(source='creator.user.username')
     # likes = serializers.StringRelatedField(many=True)
     # dislikes = serializers.StringRelatedField(many=True)
-    # categories = serializers.StringRelatedField(many=True)
+    categories = serializers.StringRelatedField(many=True)
 
     class Meta:
         model = Post
