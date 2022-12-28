@@ -68,7 +68,7 @@ class LikeSerializer(serializers.ModelSerializer):
 
 
 class DislikeSerializer(serializers.ModelSerializer):
-    # user = serializers.ReadOnlyField(source='user.username')
+    profile = serializers.ReadOnlyField(source='profile.user.username')
     # ctg_following = serializers.StringRelatedField(many=True)
 
     class Meta:
@@ -77,7 +77,7 @@ class DislikeSerializer(serializers.ModelSerializer):
 
 
 class CommentSerializer(serializers.ModelSerializer):
-    # user = serializers.ReadOnlyField(source='user.username')
+    profile = serializers.ReadOnlyField(source='profile.user.username')
     # ctg_following = serializers.StringRelatedField(many=True)
 
     class Meta:

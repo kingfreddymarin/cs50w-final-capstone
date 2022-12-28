@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { FaThumbsDown, FaThumbsUp } from "react-icons/fa";
+import Post from '../pages/Post'
 
 import Axios from 'axios'
 
 
 const Home = () => {
    const [posts, setPosts] = useState([])
+   const [currentPost, setCurrentPost] = useState(null)
 
    useEffect(() => {
       const fetchData = async () => {
@@ -37,87 +39,49 @@ const Home = () => {
          }
       }
       fetchData()
-   }, [])
+      console.log(currentPost)
+   }, [currentPost])
 
    return (<div className="home-container">
-      <div className="inner-main">
+      <div className="inner-main d-flex flex-column align-items-center">
          {posts.map((post) => {
             const { id, content, title, likes, dislikes, comments, categories } = post
-            console.log(categories)
             return (
-               <div key={id} className="inner-main-body p-2 p-sm-3 forum-content show">
-                  <div className="card mb-2">
-                     <div className="card-body p-2 p-sm-3">
-                        <div className="media forum-item">
+               <div key={id} className="inner-main-body p-2 p-sm-3 forum-content show ">
+                  <div className="card mb-2" style={{ maxWidth: "40rem" }}>
+                     <div className="card-body p-2 p-sm-3" >
+                        <div className="d-flex flex-column" >
                            <div className="media-body">
                               <div className="">
-                                 <h6><a href="#" data-target=".forum-content" className="text-body">{title}</a></h6>
+                                 <h6 className="text-body">{title}</h6>
                                  <section className="category-conteiner d-flex">
                                     {categories.map((category) => {
                                        return (
                                           <div key={category.id}>
-                                             <span class="badge badge-secondary mr-2">{category}</span>
+                                             <span className="badge badge-secondary mr-2">{category}</span>
                                           </div>
                                        )
                                     })}
-
                                  </section>
                               </div>
                               <p className="text-secondary">
-                                 {content.substring(0, 144)}...
+                                 {content}
                               </p>
                            </div>
                            <div className="text-muted small text-center align-self-center align-items-center">
                               <span className="d-none d-sm-inline-block"> <FaThumbsUp /> {likes.length} </span>
                               <span className="d-none d-sm-inline-block ml-2"> <FaThumbsDown /> {dislikes.length}</span>
-                              <span><i className="far fa-comment ml-2"></i>{comments.length}</span>
+                              <span onClick={() => setCurrentPost(post)}><button type="button" data-toggle="modal" data-target="#exampleModalLong" style={{ border: 'none' }}><i className="far fa-comment ml-2"></i>{comments.length}</button></span>
                            </div>
                         </div>
                      </div>
                   </div>
+                  <div className="modal fade" id="exampleModalLong" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                     {currentPost != null && <Post currentPost={currentPost} />}
+                  </div>
                </div>
             )
          })}
-         {/* <div class="inner-main-body p-2 p-sm-3 collapse forum-content">
-            <a href="#" class="btn btn-light btn-sm mb-3 has-icon" data-toggle="collapse" data-target=".forum-content"><i class="fa fa-arrow-left mr-2"></i>Back</a>
-            <div class="card mb-2">
-               <div class="card-body">
-                  <div class="media forum-item">
-                     <div class="media-body ml-3">
-                        <a href="javascript:void(0)" class="text-secondary">Mokrani</a>
-                        <small class="text-muted ml-2">1 hour ago</small>
-                        <h5 class="mt-1">Realtime fetching data</h5>
-                        <div class="mt-3 font-size-sm">
-                           <p>Hellooo :)</p>
-                           <p>
-                              I'm newbie with laravel and i want to fetch data from database in realtime for my dashboard anaytics and i found a solution with ajax but it dosen't work if any one have a simple solution it will be
-                              helpful
-                           </p>
-                           <p>Thank</p>
-                        </div>
-                     </div>
-                     <div class="text-muted small text-center">
-                        <span class="mr-2 d-none d-sm-inline-block"> Likes</span>
-                        <span>Dislikes</span>
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <div class="card mb-2">
-               <div class="card-body">
-                  <div class="media forum-item">
-                     <div class="media-body ml-3">
-                        <a href="javascript:void(0)" class="text-secondary">drewdan</a>
-                        <small class="text-muted ml-2">1 hour ago</small>
-                        <div class="mt-3 font-size-sm">
-                           <p>What exactly doesn't work with your ajax calls?</p>
-                           <p>Also, WebSockets are a great solution for realtime data on a dashboard. Laravel offers this out of the box using broadcasting</p>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div> */}
       </div>
    </div>);
 }

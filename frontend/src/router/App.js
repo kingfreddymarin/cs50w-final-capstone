@@ -7,6 +7,7 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Redirect from "../pages/Redirect"
 import Profile from "../pages/Profile"
+import Post from "../pages/Post"
 
 
 function App() {
