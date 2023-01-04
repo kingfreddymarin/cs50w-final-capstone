@@ -32,19 +32,19 @@ const Header = () => {
             </button>
             <div className="collapse navbar-collapse" id="navbarNav">
                <ul className="navbar-nav">
-                  <li className="nav-item nav-link">
-                     <Link to="/">
+                  <li>
+                     <Link className="nav-item nav-link" to="/">
                         Home
                      </Link>
                   </li>
-                  <li className="nav-item">
-                     <a className="nav-link" href="/">My Feed</a>
+                  <li>
+                     <a className="nav-item nav-link" href="/">My Feed</a>
                   </li>
                   <li className="nav-item">
                      <a className="nav-link" href="/">Comunity</a>
                   </li>
-                  <li className="nav-item nav-link">
-                     <Link to="/profile">
+                  <li >
+                     <Link className="nav-item nav-link" to="/profile">
                         My profile
                      </Link>
                   </li>

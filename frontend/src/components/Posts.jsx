@@ -6,7 +6,10 @@ import Comments from '../pages/Comments'
 
 const Posts = ({ post, currentUser }) => {
     const [likeFill, setLikeFill] = useState(false)
+    const [likeCount, setLikeCount] = useState(post.likes.length)
     const [dislikeFill, setDislikeFill] = useState(false)
+    const [dislikeCount, setDislikeCount] = useState(post.dislikes.length)
+
     const [currentPost, setCurrentPost] = useState(null)
 
     const { content, title, likes, dislikes, comments, categories } = post
@@ -14,7 +17,10 @@ const Posts = ({ post, currentUser }) => {
     const likeHandler = (likes) => {
         if (!likeFill) {
             /*likes.indexOf(currentUser.id) === -1*/
-            dislikeFill ? setDislikeFill(false) : console.log('bop')
+            dislikeFill ? (
+                setDislikeFill(false)
+
+            ) : console.log('bop')
             setLikeFill(true)
         } else {
             setLikeFill(false)
@@ -68,8 +74,8 @@ const Posts = ({ post, currentUser }) => {
                             </p>
                         </div>
                         <div className="text-muted small text-center align-self-center align-items-center">
-                            <span onClick={() => likeHandler(likes)} className="d-none d-sm-inline-block"> {likeFill ? <FaThumbsUp className='like' /> : <FaThumbsUp className='none' />} {likes.length} </span>
-                            <span onClick={() => dislikeHandler(dislikes)} className="d-none d-sm-inline-block ml-2"> {dislikeFill ? <FaThumbsDown className='dislike' /> : <FaThumbsDown className='none' />} {dislikes.length}</span>
+                            <span onClick={() => likeHandler(likes)} className="d-none d-sm-inline-block"> {likeFill ? <FaThumbsUp className='like' /> : <FaThumbsUp className='none' />} {likeCount} </span>
+                            <span onClick={() => dislikeHandler(dislikes)} className="d-none d-sm-inline-block ml-2"> {dislikeFill ? <FaThumbsDown className='dislike' /> : <FaThumbsDown className='none' />} {dislikeCount}</span>
                             <span onClick={() => setCurrentPost(post)}><button type="button" data-toggle="modal" data-target="#exampleModalLong" style={{ border: 'none' }}><i className="far fa-comment ml-2"></i>{comments.length}</button></span>
                         </div>
                     </div>
