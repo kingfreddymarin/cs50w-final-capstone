@@ -10,6 +10,7 @@ const Home = ({ currentUser }) => {
    const sortedPosts = posts.sort((a, b) => b.likes - a.likes);
 
    useEffect(() => {
+      console.log(currentUser)
       const fetchData = async () => {
          try {
             Axios.get('http://localhost:8000/all-posts/')
@@ -39,7 +40,7 @@ const Home = ({ currentUser }) => {
          }
       }
       fetchData()
-   }, [])
+   }, [currentUser])
 
 
    return (<div className="home-container">

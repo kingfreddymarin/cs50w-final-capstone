@@ -34,13 +34,16 @@ const Posts = ({ post, currentUser }) => {
 
     useEffect(() => {
         likes.forEach((like) => {
-            if (like.profile) {
+            if (like.profile === currentUser.username) {
                 return setLikeFill(true)
-            } else {
-                return setLikeFill(false)
             }
         })
-    }, [likes, currentUser])
+        dislikes.forEach((dislike) => {
+            if (dislike.profile === currentUser.username) {
+                return setDislikeFill(true)
+            }
+        })
+    }, [currentUser, likes, dislikes])
 
     return (
         <div className="inner-main-body p-2 p-sm-3 forum-content show ">

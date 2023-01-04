@@ -60,6 +60,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 
 class LikeSerializer(serializers.ModelSerializer):
     # user = serializers.ReadOnlyField(source='user.username')
+    profile = serializers.ReadOnlyField(source='profile.user.username')
     # ctg_following = serializers.StringRelatedField(many=True)
 
     class Meta:
