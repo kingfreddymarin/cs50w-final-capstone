@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Post = ({ currentPost }) => {
+const Comments = ({ currentPost }) => {
     return (
         <div className="modal-dialog" role="document">
             <div className="modal-content">
@@ -26,4 +26,4 @@ const Post = ({ currentPost }) => {
     );
 }
 
-export default Post;
+export default Comments;

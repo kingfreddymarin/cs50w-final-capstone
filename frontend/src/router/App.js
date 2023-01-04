@@ -7,7 +7,6 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Redirect from "../pages/Redirect"
 import Profile from "../pages/Profile"
-import Post from "../pages/Post"
 
 
 function App() {
@@ -38,7 +37,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={isValid ? <Layout /> : <Login />}>
-          <Route index element={<Home />} />
+          <Route index element={<Home currentUser={loggedUser} />} />
           <Route path="/profile" element={<Profile currentUser={loggedUser} />} />
           {/* <Route path="*" element={<NoPage />} /> */}
         </Route>

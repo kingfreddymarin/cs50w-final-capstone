@@ -114,7 +114,7 @@ def index(request):
 
 @api_view(['GET'])
 def allPosts(request):
-    posts = Post.objects.all().order_by('-timestamp')
+    posts = Post.objects.all()
     serializer = PostSerializer(posts, many=True)
     return Response(serializer.data)
 
