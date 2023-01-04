@@ -1,7 +1,7 @@
 // https://www.bootdey.com/snippets/view/profile-with-data-and-skills
 const Profile = ({ currentUser }) => {
 
-    const { id, username, email, first_name, last_name, likes, dislikes, comments, profile_data } = currentUser
+    const { username, email, first_name, last_name, likes, dislikes, comments, profile_data } = currentUser
     const { ctg_following } = profile_data
     return (
         <>

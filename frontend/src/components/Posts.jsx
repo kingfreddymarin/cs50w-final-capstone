@@ -1,17 +1,19 @@
 import React from 'react';
+import { useEffect } from 'react';
 import { useState } from 'react';
 import { FaThumbsDown, FaThumbsUp } from "react-icons/fa";
 import Comments from '../pages/Comments'
 
-const Posts = ({ post }) => {
+const Posts = ({ post, currentUser }) => {
     const [likeFill, setLikeFill] = useState(false)
     const [dislikeFill, setDislikeFill] = useState(false)
     const [currentPost, setCurrentPost] = useState(null)
 
-    const { id, content, title, likes, dislikes, comments, categories } = post
+    const { content, title, likes, dislikes, comments, categories } = post
 
     const likeHandler = (likes) => {
-        if (!likeFill/*likes.indexOf(currentUser.id) === -1*/) {
+        if (!likeFill) {
+            /*likes.indexOf(currentUser.id) === -1*/
             dislikeFill ? setDislikeFill(false) : console.log('bop')
             setLikeFill(true)
         } else {
@@ -29,8 +31,19 @@ const Posts = ({ post }) => {
         }
         console.log(dislikes)
     }
+
+    useEffect(() => {
+        likes.forEach((like) => {
+            if (like.profile) {
+                return setLikeFill(true)
+            } else {
+                return setLikeFill(false)
+            }
+        })
+    }, [likes, currentUser])
+
     return (
-        <div key={id} className="inner-main-body p-2 p-sm-3 forum-content show ">
+        <div className="inner-main-body p-2 p-sm-3 forum-content show ">
             <div className="card mb-2" style={{ maxWidth: "40rem" }}>
                 <div className="card-body p-2 p-sm-3" >
                     <div className="d-flex flex-column" >
@@ -40,14 +53,14 @@ const Posts = ({ post }) => {
                                 <section className="category-conteiner d-flex">
                                     {categories.map((category) => {
                                         return (
-                                            <div key={category.id}>
+                                            <div key={category} >
                                                 <span className="badge badge-secondary mr-2">{category}</span>
                                             </div>
                                         )
                                     })}
                                 </section>
                             </div>
-                            <p className="text-secondary">
+                            <p >
                                 {content}
                             </p>
                         </div>

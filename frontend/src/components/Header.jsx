@@ -22,7 +22,7 @@ const Header = () => {
    }
    return (
       <nav className="navbar navbar-dark bg-dark bg-light">
-         <a className="navbar-brand" href="#">
+         <a className="navbar-brand" href="/">
             <FaWolfPackBattalion />
             WOLFTECH
          </a>
@@ -32,27 +32,24 @@ const Header = () => {
             </button>
             <div className="collapse navbar-collapse" id="navbarNav">
                <ul className="navbar-nav">
-                  <Link to="/">
-                     <li className="nav-item">
-                        <a className="nav-link" href="#">Home</a>
-                     </li>
-                  </Link>
-                  <li className="nav-item">
-                     <a className="nav-link" href="#">My Feed</a>
+                  <li className="nav-item nav-link">
+                     <Link to="/">
+                        Home
+                     </Link>
                   </li>
                   <li className="nav-item">
-                     <a className="nav-link" href="#">Comunity</a>
-                  </li>
-                  <Link to="/profile">
-                     <li className="nav-item">
-                        <a className="nav-link" href="#">My profile</a>
-                     </li>
-                  </Link>
-                  <li className="nav-item">
-                     <a className="nav-link" href="#">Notifications</a>
+                     <a className="nav-link" href="/">My Feed</a>
                   </li>
                   <li className="nav-item">
-                     <a onClick={handleLogout} className="nav-link" href="#">Log out</a>
+                     <a className="nav-link" href="/">Comunity</a>
+                  </li>
+                  <li className="nav-item nav-link">
+                     <Link to="/profile">
+                        My profile
+                     </Link>
+                  </li>
+                  <li className="nav-item">
+                     <a onClick={handleLogout} className="nav-link" href="/">Log out</a>
                   </li>
                   {/* <li className="nav-item">
                   <a className="nav-link disabled" href="#">Disabled</a>

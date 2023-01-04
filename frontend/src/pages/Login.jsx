@@ -35,7 +35,9 @@ const Login = () => {
          <div className="container h-100">
             <div className="row d-flex justify-content-center align-items-center h-100">
                <div className="col-lg-12 col-xl-11">
-                  <div className="mt-5 mb-5 card text-black" style={{ borderRadius: "25px" }}>
+                  <p className="mt-5 mb-4 text-center text-secondary">Welcome to the Wolftech Community Forum! If you're new here, we encourage you to sign up for an account so you can fully participate in the discussions and take advantage of all the features our community has to offer. If you already have an account, please sign in so you can easily access all of your saved content and customized settings. We look forward to seeing you around the forum and hearing your thoughts on all of the latest tech trends!
+                  </p>
+                  <div className="mt-2 mb-5 card text-black" style={{ borderRadius: "25px" }}>
                      <div className="card-body p-md-5">
                         <div className="row justify-content-center">
                            <div className="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
@@ -45,7 +47,6 @@ const Login = () => {
                                     WOLFTECH
                                  </div>
                               </div>
-
                               <form className="mx-1 mx-md-4">
                                  <div className="d-flex flex-row align-items-center mb-4">
                                     <i className="fas fa-user fa-lg me-3 fa-fw"></i>
@@ -76,7 +77,7 @@ const Login = () => {
                            </div>
                            <div className="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
                               <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
-                                 className="img-fluid" alt="Sample image" />
+                                 className="img-fluid" alt="Login" />
                            </div>
                         </div>
                      </div>

@@ -9,8 +9,6 @@ const Home = ({ currentUser }) => {
    const [posts, setPosts] = useState([])
    const sortedPosts = posts.sort((a, b) => b.likes - a.likes);
 
-
-
    useEffect(() => {
       const fetchData = async () => {
          try {
@@ -48,7 +46,7 @@ const Home = ({ currentUser }) => {
       <div className="inner-main d-flex flex-column align-items-center">
          {sortedPosts.map((post) => {
             return (
-               <Posts post={post} />
+               <Posts currentUser={currentUser} key={post.id} post={post} />
             )
          })}
       </div>

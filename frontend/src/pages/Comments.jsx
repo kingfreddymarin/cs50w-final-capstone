@@ -14,10 +14,10 @@ const Comments = ({ currentPost }) => {
                     {currentPost.comments.length < 1 && <strong><p>There are no comments yet :/</p></strong>}
                     {currentPost.comments.map((comment) => {
                         return (
-                            <>
+                            <div>
                                 <h6 className='mb-0'>{comment.profile}</h6>
                                 <p className='mb-1'>{comment.content}</p>
-                            </>
+                            </div>
                         )
                     })}
                 </div>
