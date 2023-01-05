@@ -8,12 +8,10 @@ import Axios from 'axios'
 
 const Posts = ({ post, currentUser }) => {
     const { content, title, likes, dislikes, comments, categories } = post
-    const [likeArray, setLikeArray] = useState(likes)
-    const [dislikeArray, setDislikeArray] = useState(dislikes)
     const [likeFill, setLikeFill] = useState(false)
     const [likeCount, setLikeCount] = useState(likes.length)
     const [dislikeFill, setDislikeFill] = useState(false)
-    const [dislikeCount, setDislikeCount] = useState(dislikeArray.length)
+    const [dislikeCount, setDislikeCount] = useState(dislikes.length)
 
     const [currentPost, setCurrentPost] = useState(null)
 
@@ -22,7 +20,17 @@ const Posts = ({ post, currentUser }) => {
         if (!likeFill) {
             /*likes.indexOf(currentUser.id) === -1*/
             if (dislikeFill) {
+                setDislikeCount(dislikeCount - 1)
                 setDislikeFill(false)
+                Axios.post('http://localhost:8000/dislike/', {
+                    undislike: true,
+                    post: post,
+                    user: currentUser
+                }).then(function (response) {
+                    console.log('boom')
+                }).catch(function (error) {
+                    console.log(error)
+                });
             }
             setLikeCount(likeCount + 1)
             setLikeFill(true)
@@ -53,10 +61,42 @@ const Posts = ({ post, currentUser }) => {
 
     const dislikeHandler = (dislikes) => {
         if (!dislikeFill) {
-            likeFill ? setLikeFill(false) : console.log('bop')
+            if (likeFill) {
+                setLikeCount(likeCount - 1)
+                setLikeFill(false)
+                Axios.post('http://localhost:8000/like/', {
+                    unlike: true,
+                    post: post,
+                    user: currentUser
+                }).then(function (response) {
+                    console.log('boom')
+                }).catch(function (error) {
+                    console.log(error)
+                });
+            }
+            setDislikeCount(dislikeCount + 1)
             setDislikeFill(true)
+            Axios.post('http://localhost:8000/dislike/', {
+                undislike: false,
+                post: post,
+                user: currentUser
+            }).then(function (response) {
+                console.log('boom')
+            }).catch(function (error) {
+                console.log(error)
+            });
         } else {
+            setDislikeCount(dislikeCount - 1)
             setDislikeFill(false)
+            Axios.post('http://localhost:8000/dislike/', {
+                undislike: true,
+                post: post,
+                user: currentUser
+            }).then(function (response) {
+                console.log('boom')
+            }).catch(function (error) {
+                console.log(error)
+            });
         }
         console.log(dislikes)
     }

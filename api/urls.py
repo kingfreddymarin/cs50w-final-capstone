@@ -17,5 +17,7 @@ urlpatterns = [
     path('all-dislikes/', views.allDislikes, name="allDislikes"),
     path('all-comments/', views.allComments, name="allComments"),
     path('postData/', views.postData, name="postData"),
-    path('like/', views.like, name="like")
+    path('like/', views.like, name="like"),
+    path('dislike/', views.dislike, name="dislike")
+
 ]

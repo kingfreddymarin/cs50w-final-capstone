@@ -206,3 +206,30 @@ def like(request):
         )
         like.save()
     return Response(request.data)
+
+
+@api_view(["POST"])
+def dislike(request):
+    data = request.data
+    undislike = data["undislike"]
+    postIm = data["post"]
+    postId = postIm["id"]
+    currentUser = data["user"]
+    userId = currentUser["id"]
+
+    user = User.objects.get(id=userId)
+    post = Post.objects.get(id=postId)
+    profile = Profile.objects.get(user=user)
+
+    if undislike:
+        # Look for the dislike
+        dislike = Dislike.objects.get(post=post, profile=profile)
+        # delete it
+        dislike.delete()
+    else:
+        dislike = Dislike(
+            profile=profile,
+            post=post
+        )
+        dislike.save()
+    return Response(request.data)
