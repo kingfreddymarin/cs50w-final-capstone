@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import "../styles/Comments.css"
 
 const Comments = ({ currentPost }) => {
+    useEffect(() => {
+        console.log(currentPost)
+    }, [currentPost])
     return (
         <div className="modal-dialog" role="document">
             <div className="modal-content">
@@ -12,9 +16,29 @@ const Comments = ({ currentPost }) => {
                 </div>
                 <div className="modal-body pt-0">
                     {currentPost.comments.length < 1 && <strong><p>There are no comments yet :/</p></strong>}
+                    {/* <form id="tweet-form">
+                        <div id="tweetbox" className="wrapper">
+                            <div className="input-box">
+                                <div className="tweet-area">
+                                    <span className="placeholder"></span>
+                                    <textarea id="content"
+                                        required
+                                        name="content"
+                                        cols="30"
+                                        rows="10"
+                                    ></textarea>
+                                </div>
+                            </div>
+                            <div className="bottom">
+                                <div className="content">
+                                    <input className="btn btn-primary" value="Send" type="submit" />
+                                </div>
+                            </div>
+                        </div>
+                    </form> */}
                     {currentPost.comments.map((comment) => {
                         return (
-                            <div>
+                            <div key={comment.id}>
                                 <h6 className='mb-0'>{comment.profile}</h6>
                                 <p className='mb-1'>{comment.content}</p>
                             </div>

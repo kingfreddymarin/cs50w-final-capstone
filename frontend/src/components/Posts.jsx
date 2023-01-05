@@ -15,7 +15,6 @@ const Posts = ({ post, currentUser }) => {
 
     const [currentPost, setCurrentPost] = useState(null)
 
-
     const likeHandler = (likes) => {
         if (!likeFill) {
             /*likes.indexOf(currentUser.id) === -1*/
@@ -101,6 +100,12 @@ const Posts = ({ post, currentUser }) => {
         console.log(dislikes)
     }
 
+    const setPost = (post) => {
+        console.log(currentPost)
+        setCurrentPost(post)
+        console.log(currentPost)
+    }
+
     useEffect(() => {
         likes.forEach((like) => {
             if (like.profile === currentUser.username) {
@@ -112,7 +117,7 @@ const Posts = ({ post, currentUser }) => {
                 return setDislikeFill(true)
             }
         })
-    }, [currentUser, likes, dislikes])
+    }, [currentPost, currentUser, likes, dislikes])
 
     return (
         <div className="inner-main-body p-2 p-sm-3 forum-content show ">
@@ -137,9 +142,9 @@ const Posts = ({ post, currentUser }) => {
                             </p>
                         </div>
                         <div className="text-muted small text-center align-self-center align-items-center">
-                            <span onClick={() => likeHandler(likes)} className="d-none d-sm-inline-block"> {likeFill ? <FaThumbsUp className='like' /> : <FaThumbsUp className='none' />} {likeCount} </span>
-                            <span onClick={() => dislikeHandler(dislikes)} className="d-none d-sm-inline-block ml-2"> {dislikeFill ? <FaThumbsDown className='dislike' /> : <FaThumbsDown className='none' />} {dislikeCount}</span>
-                            <span onClick={() => setCurrentPost(post)}><button type="button" data-toggle="modal" data-target="#exampleModalLong" style={{ border: 'none' }}><i className="far fa-comment ml-2"></i>{comments.length}</button></span>
+                            <span onClick={() => likeHandler(likes)} className=" d-sm-inline-block"> {likeFill ? <FaThumbsUp className='like' /> : <FaThumbsUp className='none' />} {likeCount} </span>
+                            <span onClick={() => dislikeHandler(dislikes)} className=" d-sm-inline-block ml-2"> {dislikeFill ? <FaThumbsDown className='dislike' /> : <FaThumbsDown className='none' />} {dislikeCount}</span>
+                            <span onClick={() => setPost(post)}><button type="button" data-toggle="modal" data-target="#exampleModalLong" style={{ border: 'none' }}><i className="far fa-comment ml-2"></i>{comments.length}</button></span>
                         </div>
                     </div>
                 </div>

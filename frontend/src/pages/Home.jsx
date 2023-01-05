@@ -45,6 +45,7 @@ const Home = ({ currentUser }) => {
 
    return (<div className="home-container">
       <div className="inner-main d-flex flex-column align-items-center">
+         <h1 className="ml-3 display-4">Welcome back, {currentUser.username}</h1>
          {sortedPosts.map((post) => {
             return (
                <Posts currentUser={currentUser} key={post.id} post={post} />
