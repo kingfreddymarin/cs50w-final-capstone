@@ -179,3 +179,30 @@ def allComments(request):
     comments = Comment.objects.all()
     serializer = CommentSerializer(comments, many=True)
     return Response(serializer.data)
+
+
+@api_view(["POST"])
+def like(request):
+    data = request.data
+    unlike = data["unlike"]
+    postIm = data["post"]
+    postId = postIm["id"]
+    currentUser = data["user"]
+    userId = currentUser["id"]
+
+    user = User.objects.get(id=userId)
+    post = Post.objects.get(id=postId)
+    profile = Profile.objects.get(user=user)
+
+    if unlike:
+        # Look for the like
+        like = Like.objects.get(post=post, profile=profile)
+        # delete it
+        like.delete()
+    else:
+        like = Like(
+            profile=profile,
+            post=post
+        )
+        like.save()
+    return Response(request.data)

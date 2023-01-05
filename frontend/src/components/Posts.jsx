@@ -3,27 +3,50 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { FaThumbsDown, FaThumbsUp } from "react-icons/fa";
 import Comments from '../pages/Comments'
+import Axios from 'axios'
+
 
 const Posts = ({ post, currentUser }) => {
+    const { content, title, likes, dislikes, comments, categories } = post
+    const [likeArray, setLikeArray] = useState(likes)
+    const [dislikeArray, setDislikeArray] = useState(dislikes)
     const [likeFill, setLikeFill] = useState(false)
-    const [likeCount, setLikeCount] = useState(post.likes.length)
+    const [likeCount, setLikeCount] = useState(likes.length)
     const [dislikeFill, setDislikeFill] = useState(false)
-    const [dislikeCount, setDislikeCount] = useState(post.dislikes.length)
+    const [dislikeCount, setDislikeCount] = useState(dislikeArray.length)
 
     const [currentPost, setCurrentPost] = useState(null)
 
-    const { content, title, likes, dislikes, comments, categories } = post
 
     const likeHandler = (likes) => {
         if (!likeFill) {
             /*likes.indexOf(currentUser.id) === -1*/
-            dislikeFill ? (
+            if (dislikeFill) {
                 setDislikeFill(false)
-
-            ) : console.log('bop')
+            }
+            setLikeCount(likeCount + 1)
             setLikeFill(true)
+            Axios.post('http://localhost:8000/like/', {
+                unlike: false,
+                post: post,
+                user: currentUser
+            }).then(function (response) {
+                console.log('boom')
+            }).catch(function (error) {
+                console.log(error)
+            });
         } else {
+            setLikeCount(likeCount - 1)
             setLikeFill(false)
+            Axios.post('http://localhost:8000/like/', {
+                unlike: true,
+                post: post,
+                user: currentUser
+            }).then(function (response) {
+                console.log('boom')
+            }).catch(function (error) {
+                console.log(error)
+            });
         }
         console.log(likes)
     }
