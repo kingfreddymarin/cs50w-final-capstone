@@ -1,5 +1,9 @@
 .filterContainer {
   width: 100vw;
   height: auto;
-  background-color: rgb(73, 248, 248);
+  background-color: rgb(28, 28, 28);
+}
+
+.hover {
+  cursor: pointer;
 }

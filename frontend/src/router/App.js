@@ -12,6 +12,7 @@ function App() {
   const token = window.localStorage.getItem("token");
   const [isValid, setIsValid] = useState(null);
   const [loggedUser, setLoggedUser] = useState({});
+  const [categories, setCategories] = useState([]);
   useEffect(() => {
     axios
       .get("http://localhost:8000/user/", {
@@ -33,12 +34,26 @@ function App() {
         setLoggedUser({});
         setIsValid(false);
       });
+
+    // fetching all categories
+    axios
+      .get("http://localhost:8000/all-categories")
+      .then(function (response) {
+        console.log(response);
+        setCategories(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }, [token]);
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={isValid ? <Layout /> : <Login />}>
-          <Route index element={<Home currentUser={loggedUser} />} />
+          <Route
+            index
+            element={<Home categories={categories} currentUser={loggedUser} />}
+          />
           <Route
             path="/profile"
             element={<Profile currentUser={loggedUser} />}

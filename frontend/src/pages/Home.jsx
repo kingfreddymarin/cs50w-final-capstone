@@ -7,7 +7,7 @@ import Filters from "../containers/Filters";
 import Axios from 'axios'
 
 
-const Home = ({ currentUser }) => {
+const Home = ({ currentUser, categories }) => {
    const [posts, setPosts] = useState([])
    const [showComments, setShowComments] = useState(false)
    const [post, setPost] = useState([])
@@ -49,7 +49,7 @@ const Home = ({ currentUser }) => {
 
    return (
       <>
-         <Filters></Filters>
+         <Filters categories={categories}></Filters>
          <div className="home-container">
             {!showComments && (
                <div className="inner-main d-flex flex-column align-items-center">

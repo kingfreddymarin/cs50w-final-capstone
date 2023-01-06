@@ -1,9 +1,14 @@
 import React from 'react';
 import '../styles/Filters.css'
-const Filters = () => {
+import Category from '../components/Category';
+const Filters = ({ categories }) => {
    return (
-      <div className='filterContainer'>
-
+      <div className='filterContainer d-flex flex-nowrap'>
+         {categories.map((category) => {
+            return (
+               <Category key={category.id} category={category} />
+            )
+         })}
       </div>
    );
 }
