@@ -14,10 +14,10 @@ const Home = ({ currentUser, categories }) => {
    const [activeFilter, setActiveFilter] = useState([])
    const [allPosts, setAllPosts] = useState([])
    const [filteredPosts, setFilteredPosts] = useState([])
+
    // const sortedPosts = posts.sort((a, b) => b.likes - a.likes);
 
    useEffect(() => {
-      console.log(currentUser)
       const fetchData = async () => {
          try {
             Axios.get('http://localhost:8000/all-posts/')
@@ -66,8 +66,18 @@ const Home = ({ currentUser, categories }) => {
          })
          setPosts(filteredPosts)
       }
+      if (activeFilter.length > 1) {
+         posts.forEach((post) => {
+            const categories = post.categories
+            activeFilter.forEach((category) => {
+               if (categories.indexOf(category.name) !== -1) {
+                  setFilteredPosts(posts.filter(p => p !== post))
+               }
+            })
+         })
+      }
 
-   }, [setFilteredPosts, filteredPosts, activeFilter, allPosts])
+   }, [filteredPosts, activeFilter])
 
 
    return (

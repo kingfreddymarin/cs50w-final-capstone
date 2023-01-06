@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../styles/Filters.css'
 import Category from '../components/Category';
 const Filters = ({ categories, activeFilter, setActiveFilter }) => {

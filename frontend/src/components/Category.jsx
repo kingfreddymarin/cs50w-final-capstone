@@ -1,9 +1,13 @@
 import React from 'react';
+import { useEffect } from 'react';
 import { useState } from 'react';
-const Category = ({ category, activeFilter, setActiveFilter }) => {
+const Category = ({ category, activeFilter, setActiveFilter, selected, setSelected }) => {
    const [select, setSelect] = useState(false)
 
    const handleSelect = () => {
+      // if (activeFilter.length > 0) {
+      //    setActiveFilter([])
+      // }
       if (select) {
          const newArray = activeFilter.filter(filter => filter !== category)
          setActiveFilter(newArray)
