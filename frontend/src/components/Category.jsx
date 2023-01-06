@@ -8,11 +8,9 @@ const Category = ({ category, activeFilter, setActiveFilter }) => {
          const newArray = activeFilter.filter(filter => filter !== category)
          setActiveFilter(newArray)
          setSelect(false)
-         console.log(activeFilter)
       } else {
          setActiveFilter(activeFilter => [...activeFilter, category])
          setSelect(true)
-         console.log(activeFilter)
       }
    }
    return (
