@@ -2,11 +2,10 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { FaThumbsDown, FaThumbsUp } from "react-icons/fa";
-import Comments from '../pages/Comments'
 import Axios from 'axios'
 
 
-const Posts = ({ post, currentUser }) => {
+const Posts = ({ post, currentUser, setShowComments, setPost }) => {
     const { content, title, likes, dislikes, comments, categories } = post
     const [likeFill, setLikeFill] = useState(false)
     const [likeCount, setLikeCount] = useState(likes.length)
@@ -100,10 +99,10 @@ const Posts = ({ post, currentUser }) => {
         console.log(dislikes)
     }
 
-    const setPost = (post) => {
-        console.log(currentPost)
+    const commentsHandler = () => {
         setCurrentPost(post)
-        console.log(currentPost)
+        setShowComments(true)
+        setPost(post)
     }
 
     useEffect(() => {
@@ -144,13 +143,10 @@ const Posts = ({ post, currentUser }) => {
                         <div className="text-muted small text-center align-self-center align-items-center">
                             <span onClick={() => likeHandler(likes)} className=" d-sm-inline-block"> {likeFill ? <FaThumbsUp className='like' /> : <FaThumbsUp className='none' />} {likeCount} </span>
                             <span onClick={() => dislikeHandler(dislikes)} className=" d-sm-inline-block ml-2"> {dislikeFill ? <FaThumbsDown className='dislike' /> : <FaThumbsDown className='none' />} {dislikeCount}</span>
-                            <span onClick={() => setPost(post)}><button type="button" data-toggle="modal" data-target="#exampleModalLong" style={{ border: 'none' }}><i className="far fa-comment ml-2"></i>{comments.length}</button></span>
+                            <span onClick={commentsHandler}><button type="button" data-toggle="modal" data-target="#exampleModalLong" style={{ border: 'none' }}><i className="far fa-comment ml-2"></i>{comments.length}</button></span>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className="modal fade" id="exampleModalLong" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-                {currentPost != null && <Comments currentPost={currentPost} />}
             </div>
         </div>
     );

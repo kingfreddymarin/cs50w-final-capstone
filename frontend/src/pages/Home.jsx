@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import '../styles/Home.css'
 import Posts from '../components/Posts'
+import Comments from "./Comments";
 
 import Axios from 'axios'
 
 
 const Home = ({ currentUser }) => {
    const [posts, setPosts] = useState([])
+   const [showComments, setShowComments] = useState(false)
+   const [post, setPost] = useState([])
    const sortedPosts = posts.sort((a, b) => b.likes - a.likes);
 
    useEffect(() => {
@@ -44,14 +47,19 @@ const Home = ({ currentUser }) => {
 
 
    return (<div className="home-container">
-      <div className="inner-main d-flex flex-column align-items-center">
-         <h1 className="ml-3 display-4">Welcome back, {currentUser.username}</h1>
-         {sortedPosts.map((post) => {
-            return (
-               <Posts currentUser={currentUser} key={post.id} post={post} />
-            )
-         })}
-      </div>
+      {!showComments && (
+         <div className="inner-main d-flex flex-column align-items-center">
+            <h1 className="ml-3 display-4">Welcome back, {currentUser.username}</h1>
+            {sortedPosts.map((post) => {
+               return (
+                  <Posts setPost={setPost} showCommets={showComments} setShowComments={setShowComments} currentUser={currentUser} key={post.id} post={post} />
+               )
+            })}
+         </div>
+      )}
+      {showComments && (
+         <Comments currentPost={post} setShowComments={setShowComments} />
+      )}
    </div>);
 }
 

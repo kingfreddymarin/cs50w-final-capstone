@@ -1,22 +1,19 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import "../styles/Comments.css"
 
-const Comments = ({ currentPost }) => {
-    useEffect(() => {
-        console.log(currentPost)
-    }, [currentPost])
+const Comments = ({ currentPost, setShowComments }) => {
     return (
         <div className="modal-dialog" role="document">
             <div className="modal-content">
                 <div className="modal-header pb-2">
                     <h5 className="modal-title mb-1" id="exampleModalLongTitle">Comments</h5>
-                    <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                    <button onClick={() => setShowComments(false)} type="button" className="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div className="modal-body pt-0">
                     {currentPost.comments.length < 1 && <strong><p>There are no comments yet :/</p></strong>}
-                    {/* <form id="tweet-form">
+                    <form id="tweet-form">
                         <div id="tweetbox" className="wrapper">
                             <div className="input-box">
                                 <div className="tweet-area">
@@ -35,7 +32,7 @@ const Comments = ({ currentPost }) => {
                                 </div>
                             </div>
                         </div>
-                    </form> */}
+                    </form>
                     {currentPost.comments.map((comment) => {
                         return (
                             <div key={comment.id}>

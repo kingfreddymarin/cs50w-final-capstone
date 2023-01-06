@@ -15,21 +15,21 @@ const Profile = ({ currentUser }) => {
             {likes.map((like) => {
                 const { timestamp } = like
                 return (
-                    <p>{timestamp}</p>
+                    <p key={like.id}>{timestamp}</p>
                 )
             })}
             <h5>comments: {comments.length}</h5>
             {comments.map((comment) => {
                 const { timestamp } = comment
                 return (
-                    <p>{timestamp}</p>
+                    <p key={comment.id}>{timestamp}</p>
                 )
             })}
             <h5>dislikes: {dislikes.length}</h5>
             {dislikes.map((dislike) => {
                 const { timestamp } = dislike
                 return (
-                    <p>{timestamp}</p>
+                    <p key={dislike.id}>{timestamp}</p>
                 )
             })}
         </>
