@@ -8,8 +8,8 @@ from rest_framework.decorators import api_view
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from knox.auth import AuthToken
 
-from .models import Post, Profile, Like, Dislike, Comment, User
-from .serializers import PostSerializer, ProfileSerializer, LikeSerializer, DislikeSerializer, CommentSerializer, RegisterSerializers
+from .models import Post, Profile, Like, Dislike, Comment, User, Category
+from .serializers import PostSerializer, ProfileSerializer, LikeSerializer, DislikeSerializer, CommentSerializer, RegisterSerializers, CategorySerializer
 
 
 # Register API
@@ -116,6 +116,13 @@ def index(request):
 def allPosts(request):
     posts = Post.objects.all()
     serializer = PostSerializer(posts, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def allCategories(request):
+    categories = Category.objects.all()
+    serializer = CategorySerializer(categories, many=True)
     return Response(serializer.data)
 
 

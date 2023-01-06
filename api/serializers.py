@@ -1,5 +1,5 @@
 from rest_framework import serializers, validators
-from .models import Post, Profile, Like, Dislike, Comment, User
+from .models import Post, Profile, Like, Dislike, Comment, User, Category
 
 
 class RegisterSerializers(serializers.ModelSerializer):
@@ -84,3 +84,12 @@ class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = ('id', 'timestamp', 'profile', 'post', 'content')
+
+
+class CategorySerializer(serializers.ModelSerializer):
+    # profile = serializers.ReadOnlyField(source='profile.user.username')
+    followers = serializers.StringRelatedField(many=True)
+
+    class Meta:
+        model = Category
+        fields = ('id', 'name', 'followers')
