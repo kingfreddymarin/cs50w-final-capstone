@@ -5,9 +5,6 @@ const Category = ({ category, activeFilter, setActiveFilter, selected, setSelect
    const [select, setSelect] = useState(false)
 
    const handleSelect = () => {
-      // if (activeFilter.length > 0) {
-      //    setActiveFilter([])
-      // }
       if (select) {
          const newArray = activeFilter.filter(filter => filter !== category)
          setActiveFilter(newArray)

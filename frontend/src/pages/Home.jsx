@@ -55,28 +55,17 @@ const Home = ({ currentUser, categories }) => {
          setPosts(allPosts)
          setFilteredPosts([])
       }
-      if (activeFilter.length === 1) {
+      if (activeFilter.length > 0) {
          posts.forEach((post) => {
             const categories = post.categories
             activeFilter.forEach((category) => {
                if (categories.indexOf(category.name) !== -1) {
-                  setFilteredPosts((posts) => [...posts, post])
+                  setFilteredPosts((filteredPosts) => [...filteredPosts, post])
                }
             })
          })
          setPosts(filteredPosts)
       }
-      if (activeFilter.length > 1) {
-         posts.forEach((post) => {
-            const categories = post.categories
-            activeFilter.forEach((category) => {
-               if (categories.indexOf(category.name) !== -1) {
-                  setFilteredPosts(posts.filter(p => p !== post))
-               }
-            })
-         })
-      }
-
    }, [filteredPosts, activeFilter])
 
 
