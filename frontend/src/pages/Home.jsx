@@ -13,7 +13,8 @@ const Home = ({ currentUser, categories }) => {
    const [post, setPost] = useState([])
    const [activeFilter, setActiveFilter] = useState([])
    const [allPosts, setAllPosts] = useState([])
-   const [filteredPosts, setFilteredPosts] = useState([])
+   const [filteredPosts] = useState([])
+   
 
    // const sortedPosts = posts.sort((a, b) => b.likes - a.likes);
 
@@ -53,30 +54,32 @@ const Home = ({ currentUser, categories }) => {
    useEffect(() => {
       if (activeFilter.length === 0) {
          setPosts(allPosts)
-         setFilteredPosts([])
       }
-      if (activeFilter.length > 0) {
-         posts.forEach((post) => {
+      if (activeFilter.length === 1) {
+         let array = []
+         setPosts(allPosts)
+         allPosts.forEach((post) => {
             const categories = post.categories
             activeFilter.forEach((category) => {
                if (categories.indexOf(category.name) !== -1) {
-                  setFilteredPosts((filteredPosts) => [...filteredPosts, post])
+                  console.log(post)
+                  array.unshift(post)
                }
             })
          })
-         setPosts(filteredPosts)
+         setPosts(array)
       }
-   }, [filteredPosts, activeFilter])
+   }, [activeFilter, allPosts, filteredPosts])
 
 
    return (
       <>
-         <Filters categories={categories} activeFilter={activeFilter} setActiveFilter={setActiveFilter}></Filters>
+         <Filters allPosts={allPosts} categories={categories} activeFilter={activeFilter} setActiveFilter={setActiveFilter}></Filters>
          <div className="home-container">
             {!showComments && (
                <div className="inner-main d-flex flex-column align-items-center">
                   <h1 className="ml-3 display-4">Welcome back, {currentUser.username}</h1>
-                  {posts.map((post) => {
+                  {posts.length>0 && posts.map((post) => {
                      return (
                         <Posts setPost={setPost} showCommets={showComments} setShowComments={setShowComments} currentUser={currentUser} key={post.id} post={post} />
                      )
