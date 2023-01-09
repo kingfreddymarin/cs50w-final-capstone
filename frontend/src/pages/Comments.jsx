@@ -1,7 +1,32 @@
+import axios from 'axios';
 import React from 'react';
+import { useState } from 'react';
 import "../styles/Comments.css"
 
-const Comments = ({ currentPost, setShowComments }) => {
+const Comments = ({ currentPost, setShowComments, currentUser }) => {
+    // const [commentBox, setCommentBox]=useState(null)
+    const [comments, setComments]= useState(currentPost.comments)
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const renderComment = {
+            id: new Date().getDate().toString(),
+            profile: currentUser.username,
+            post: currentPost,
+            content: e.target.elements.content.value
+        }
+        const newComment = {
+            id: new Date().getDate().toString(),
+            profile:currentUser,
+            post:currentPost,
+            content:e.target.elements.content.value
+        }
+        axios.post('http://localhost:8000/addComment/', newComment).then(res=>{
+            setComments([...comments, renderComment])
+            e.target.elements.content.value=''
+        })
+    }
+
     return (
         <div className="modal-dialog" role="document">
             <div className="modal-content">
@@ -12,12 +37,10 @@ const Comments = ({ currentPost, setShowComments }) => {
                     </button>
                 </div>
                 <div className="modal-body pt-0">
-                    {currentPost.comments.length < 1 && <strong><p>There are no comments yet :/</p></strong>}
-                    <form id="tweet-form">
-                        <div id="tweetbox" className="wrapper">
+                    {comments.length < 1 && <strong><p>There are no comments yet :/</p></strong>}
+                    <form onSubmit={handleSubmit} className='mb-3' id="tweet-form">
                             <div className="input-box">
                                 <div className="tweet-area">
-                                    <span className="placeholder"></span>
                                     <textarea id="content"
                                         required
                                         name="content"
@@ -28,12 +51,11 @@ const Comments = ({ currentPost, setShowComments }) => {
                             </div>
                             <div className="bottom">
                                 <div className="content">
-                                    <input className="btn btn-primary" value="Send" type="submit" />
+                                    <input className="btn btn-secondary" value="Send" type="submit" />
                                 </div>
                             </div>
-                        </div>
                     </form>
-                    {currentPost.comments.map((comment) => {
+                    {comments.map((comment) => {
                         return (
                             <div key={comment.id}>
                                 <h6 className='mb-0'>{comment.profile}</h6>

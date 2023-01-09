@@ -240,3 +240,25 @@ def dislike(request):
         )
         dislike.save()
     return Response(request.data)
+
+@api_view(["POST"])
+def addComment(request):
+    data = request.data
+    postIm = data["post"]
+    postId = postIm["id"]
+    currentUser = data["profile"]
+    userId = currentUser["id"]
+    content = data["content"]
+
+    user = User.objects.get(id=userId)
+    post = Post.objects.get(id=postId)
+    profile = Profile.objects.get(user=user)
+
+    comment = Comment(
+        profile=profile,
+        post=post,
+        content=content
+    )
+    comment.save()
+    return Response(request.data)
+

@@ -19,6 +19,6 @@ urlpatterns = [
     path('all-categories', views.allCategories, name="allCategories"),
     path('postData/', views.postData, name="postData"),
     path('like/', views.like, name="like"),
-    path('dislike/', views.dislike, name="dislike")
-
+    path('dislike/', views.dislike, name="dislike"), 
+    path('addComment/', views.addComment, name="addComment")
 ]

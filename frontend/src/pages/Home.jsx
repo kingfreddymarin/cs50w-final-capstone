@@ -14,7 +14,6 @@ const Home = ({ currentUser, categories }) => {
    const [activeFilter, setActiveFilter] = useState([])
    const [allPosts, setAllPosts] = useState([])
    const [filteredPosts] = useState([])
-   
 
    const sortedPosts = posts.sort((a, b) => b.likes - a.likes);
 
@@ -77,9 +76,10 @@ const Home = ({ currentUser, categories }) => {
 
    return (
       <>
-         <Filters categories={categories} activeFilter={activeFilter} setActiveFilter={setActiveFilter}></Filters>
          <div className="home-container">
             {!showComments && (
+               <>
+               <Filters categories={categories} activeFilter={activeFilter} setActiveFilter={setActiveFilter}></Filters>
                <div className="inner-main d-flex flex-column align-items-center">
                   <h1 className="ml-3 display-4">Welcome back, {currentUser.username}</h1>
                   {sortedPosts.length>0 && posts.map((post) => {
@@ -87,10 +87,17 @@ const Home = ({ currentUser, categories }) => {
                         <Posts setPost={setPost} showCommets={showComments} setShowComments={setShowComments} currentUser={currentUser} key={post.id} post={post} />
                      )
                   })}
+                  {sortedPosts.length===0&&(
+                     <div className="mt-5">
+                     <h1>Woops!</h1>
+                     <h4>Seems like there's no posts regarding this topic ;(</h4>
+                     </div>
+                  )}
                </div>
+               </>
             )}
             {showComments && (
-               <Comments currentPost={post} setShowComments={setShowComments} />
+               <Comments currentUser={currentUser} currentPost={post} setShowComments={setShowComments} />
             )}
          </div>
       </>);

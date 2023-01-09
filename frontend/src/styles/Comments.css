@@ -30,7 +30,6 @@ textarea {
 }
 .input-box .tweet-area{
   position: relative;
-  min-height: 130px;
   max-height: 170px;
   overflow-y: auto;
 }
