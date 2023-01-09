@@ -21,7 +21,6 @@ function App() {
         },
       })
       .then(function (response) {
-        console.log(response);
         const user = response.data.user_info;
         // const id = response.data.user_info.id
         setLoggedUser(user);
@@ -39,7 +38,6 @@ function App() {
     axios
       .get("http://localhost:8000/all-categories")
       .then(function (response) {
-        console.log(response);
         setCategories(response.data);
       })
       .catch(function (error) {
