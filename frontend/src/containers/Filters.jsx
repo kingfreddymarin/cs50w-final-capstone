@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/Filters.css'
 import Category from '../components/Category';
-const Filters = ({ categories, activeFilter, setActiveFilter, allPosts }) => {
+const Filters = ({ categories, activeFilter, setActiveFilter }) => {
    return (
       <div className='filterContainer d-flex flex-nowrap'>
          {categories.map((category) => {

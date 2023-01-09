@@ -16,7 +16,7 @@ const Home = ({ currentUser, categories }) => {
    const [filteredPosts] = useState([])
    
 
-   // const sortedPosts = posts.sort((a, b) => b.likes - a.likes);
+   const sortedPosts = posts.sort((a, b) => b.likes - a.likes);
 
    useEffect(() => {
       const fetchData = async () => {
@@ -55,6 +55,7 @@ const Home = ({ currentUser, categories }) => {
       if (activeFilter.length === 0) {
          setPosts(allPosts)
       }
+      activeFilter.length === 0 ? setPosts(allPosts): console.log(activeFilter[0].name)
       if (activeFilter.length === 1) {
          let array = []
          setPosts(allPosts)
@@ -69,17 +70,19 @@ const Home = ({ currentUser, categories }) => {
          })
          setPosts(array)
       }
+      
+      
    }, [activeFilter, allPosts, filteredPosts])
 
 
    return (
       <>
-         <Filters allPosts={allPosts} categories={categories} activeFilter={activeFilter} setActiveFilter={setActiveFilter}></Filters>
+         <Filters categories={categories} activeFilter={activeFilter} setActiveFilter={setActiveFilter}></Filters>
          <div className="home-container">
             {!showComments && (
                <div className="inner-main d-flex flex-column align-items-center">
                   <h1 className="ml-3 display-4">Welcome back, {currentUser.username}</h1>
-                  {posts.length>0 && posts.map((post) => {
+                  {sortedPosts.length>0 && posts.map((post) => {
                      return (
                         <Posts setPost={setPost} showCommets={showComments} setShowComments={setShowComments} currentUser={currentUser} key={post.id} post={post} />
                      )

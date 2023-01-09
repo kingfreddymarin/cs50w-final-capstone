@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
-const Category = ({ category, activeFilter, setActiveFilter, allPosts }) => {
+const Category = ({ category, activeFilter, setActiveFilter }) => {
    const [select, setSelect] = useState(false)
 
    const handleSelect = () => {
