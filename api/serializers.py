@@ -51,7 +51,7 @@ class PostSerializer(serializers.ModelSerializer):
 
 class ProfileSerializer(serializers.ModelSerializer):
     # user = serializers.ReadOnlyField(source='user.username')
-    # ctg_following = serializers.StringRelatedField(many=True)
+    ctg_following = serializers.StringRelatedField(many=True)
 
     class Meta:
         model = Profile

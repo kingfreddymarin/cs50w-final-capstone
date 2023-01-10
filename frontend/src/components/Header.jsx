@@ -40,7 +40,7 @@ const Header = () => {
                      </a>
                   </li>
                   <li>
-                     <a className="nav-item nav-link" href="/">My Feed</a>
+                     <a className="nav-item nav-link" href="/my-feed">My Feed</a>
                   </li>
                   <li className="nav-item">
                      <a className="nav-link" href="/comunity" onClick={handleClick}>Comunity</a>

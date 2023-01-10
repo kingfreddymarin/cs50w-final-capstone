@@ -8,6 +8,7 @@ import Register from "../pages/Register";
 import Redirect from "../pages/Redirect";
 import Profile from "../pages/Profile";
 import Community from "../pages/Community"
+import Feed from "../pages/Feed";
 
 function App() {
   const token = window.localStorage.getItem("token");
@@ -58,6 +59,7 @@ function App() {
             element={<Profile currentUser={loggedUser} />}
           />
           <Route path="/comunity" element={<Community categories={categories} currentUser={loggedUser} />}></Route>
+          <Route path="/my-feed" element={<Feed categories={categories} currentUser={loggedUser} />}></Route>
           {/* <Route path="*" element={<NoPage />} /> */}
         </Route>
         <Route
