@@ -7,6 +7,7 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Redirect from "../pages/Redirect";
 import Profile from "../pages/Profile";
+import Community from "../pages/Community"
 
 function App() {
   const token = window.localStorage.getItem("token");
@@ -56,6 +57,7 @@ function App() {
             path="/profile"
             element={<Profile currentUser={loggedUser} />}
           />
+          <Route path="/comunity" element={<Community categories={categories} currentUser={loggedUser} />}></Route>
           {/* <Route path="*" element={<NoPage />} /> */}
         </Route>
         <Route

@@ -34,8 +34,8 @@ const Home = ({ currentUser, categories }) => {
                            dislikes: response.data.dislikes,
                            comments: response.data.comments
                         }
-                        setPosts(posts => [...posts, newPost])
-                        setAllPosts(posts => [...posts, newPost])
+                        setPosts(!post.isStudent ? posts => [...posts, newPost] : posts => [...posts])
+                        setAllPosts(!post.isStudent ? posts => [...posts, newPost] : posts => [...posts])
                      }).catch(function (error) {
                         console.log(error)
                      });
@@ -54,7 +54,7 @@ const Home = ({ currentUser, categories }) => {
       if (activeFilter.length === 0) {
          setPosts(allPosts)
       }
-      activeFilter.length === 0 ? setPosts(allPosts): console.log(activeFilter[0].name)
+      activeFilter.length === 0 ? setPosts(allPosts) : console.log(activeFilter[0].name)
       if (activeFilter.length === 1) {
          let array = []
          setPosts(allPosts)
@@ -69,31 +69,34 @@ const Home = ({ currentUser, categories }) => {
          })
          setPosts(array)
       }
-      
-      
+
+
    }, [activeFilter, allPosts, filteredPosts])
 
+   useEffect(() => {
+
+   }, [posts])
 
    return (
       <>
          <div className="home-container">
             {!showComments && (
                <>
-               <Filters categories={categories} activeFilter={activeFilter} setActiveFilter={setActiveFilter}></Filters>
-               <div className="inner-main d-flex flex-column align-items-center">
-                  <h1 className="ml-3 display-4">Welcome back, {currentUser.username}</h1>
-                  {sortedPosts.length>0 && posts.map((post) => {
-                     return (
-                        <Posts setPost={setPost} showCommets={showComments} setShowComments={setShowComments} currentUser={currentUser} key={post.id} post={post} />
-                     )
-                  })}
-                  {sortedPosts.length===0&&(
-                     <div className="mt-5">
-                     <h1>Woops!</h1>
-                     <h4>Seems like there's no posts regarding this topic ;(</h4>
-                     </div>
-                  )}
-               </div>
+                  <Filters categories={categories} activeFilter={activeFilter} setActiveFilter={setActiveFilter}></Filters>
+                  <div className="inner-main d-flex flex-column align-items-center">
+                     <h1 className="ml-3 display-4">Here's what's new, {currentUser.username}</h1>
+                     {sortedPosts.length > 0 && posts.map((post) => {
+                        return (
+                           <Posts setPost={setPost} showCommets={showComments} setShowComments={setShowComments} currentUser={currentUser} key={post.id} post={post} />
+                        )
+                     })}
+                     {sortedPosts.length === 0 && (
+                        <div className="mt-5">
+                           <h1>Woops!</h1>
+                           <h4>Seems like there's no posts regarding this topic ;(</h4>
+                        </div>
+                     )}
+                  </div>
                </>
             )}
             {showComments && (

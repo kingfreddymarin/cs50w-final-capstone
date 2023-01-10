@@ -1,7 +1,6 @@
 // import logo from '../assets/logos/logo.jpg'
 import axios from "axios";
 import { FaWolfPackBattalion } from "react-icons/fa";
-import { Link } from "react-router-dom";
 
 
 const Header = () => {
@@ -20,6 +19,9 @@ const Header = () => {
          console.log(error);
       });
    }
+   const handleClick = () => {
+      window.location.reload()
+   }
    return (
       <nav className="navbar navbar-dark bg-dark bg-light">
          <a className="navbar-brand" href="/">
@@ -33,20 +35,20 @@ const Header = () => {
             <div className="collapse navbar-collapse" id="navbarNav">
                <ul className="navbar-nav">
                   <li>
-                     <Link className="nav-item nav-link" to="/">
+                     <a className="nav-item nav-link" href="/" onClick={handleClick}>
                         Home
-                     </Link>
+                     </a>
                   </li>
                   <li>
                      <a className="nav-item nav-link" href="/">My Feed</a>
                   </li>
                   <li className="nav-item">
-                     <a className="nav-link" href="/">Comunity</a>
+                     <a className="nav-link" href="/comunity" onClick={handleClick}>Comunity</a>
                   </li>
                   <li >
-                     <Link className="nav-item nav-link" to="/profile">
+                     <a className="nav-item nav-link" href="/profile">
                         My profile
-                     </Link>
+                     </a>
                   </li>
                   <li className="nav-item">
                      <a onClick={handleLogout} className="nav-link" href="/">Log out</a>
