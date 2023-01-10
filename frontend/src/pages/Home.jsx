@@ -84,7 +84,7 @@ const Home = ({ currentUser, categories }) => {
                <>
                   <Filters categories={categories} activeFilter={activeFilter} setActiveFilter={setActiveFilter}></Filters>
                   <div className="inner-main d-flex flex-column align-items-center">
-                     <h1 className="ml-3 display-4">Here's what's new, {currentUser.username}</h1>
+                     <h1 className="ml-3 mt-3 display-4">Here's what's new!</h1>
                      {sortedPosts.length > 0 && posts.map((post) => {
                         return (
                            <Posts setPost={setPost} showCommets={showComments} setShowComments={setShowComments} currentUser={currentUser} key={post.id} post={post} />

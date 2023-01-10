@@ -34,13 +34,6 @@ const Feed = ({ currentUser, categories }) => {
                                     dislikes: response.data.dislikes,
                                     comments: response.data.comments
                                 }
-                                // !newPost.isStudent ? (
-                                //     newPost.categories.map((category) => {
-                                //         if (currentUser.profile_data.ctg_following.indexOf(category) !== -1) {
-                                //             setPosts(posts => [...posts, newPost])
-                                //         }
-                                //     })
-                                // ) : console.log('none')
                                 if (!newPost.isStudent) {
                                     for (let i = 0; i < newPost.categories.length; i++) {
                                         let category = newPost.categories[i]
@@ -49,8 +42,6 @@ const Feed = ({ currentUser, categories }) => {
                                             break;
                                         }
                                     }
-                                } else {
-                                    console.log('none')
                                 }
                                 if (!newPost.isStudent) {
                                     for (let i = 0; i < newPost.categories.length; i++) {
@@ -60,8 +51,6 @@ const Feed = ({ currentUser, categories }) => {
                                             break;
                                         }
                                     }
-                                } else {
-                                    console.log('none')
                                 }
                             }).catch(function (error) {
                                 console.log(error)
@@ -76,7 +65,6 @@ const Feed = ({ currentUser, categories }) => {
         }
         fetchData()
         console.log(currentUser.profile_data.ctg_following)
-        console.log(categories)
     }, [currentUser])
 
     useEffect(() => {
@@ -109,7 +97,7 @@ const Feed = ({ currentUser, categories }) => {
                     <>
                         <Filters categories={categories} activeFilter={activeFilter} setActiveFilter={setActiveFilter}></Filters>
                         <div className="inner-main d-flex flex-column align-items-center">
-                            <h1 className="ml-3 display-4">Welcome back, {currentUser.username}</h1>
+                            <h1 className=" mt-2 ml-3 display-4">My Feed</h1>
 
                             {sortedPosts.length > 0 && posts.map((post) => {
                                 return (
@@ -119,7 +107,7 @@ const Feed = ({ currentUser, categories }) => {
                             {sortedPosts.length === 0 && (
                                 <div className="mt-5">
                                     <h1>Woops!</h1>
-                                    <h4>Seems like there's no posts regarding this topic ;(</h4>
+                                    <h4>You don't follow this category ;(</h4>
                                 </div>
                             )}
                         </div>
