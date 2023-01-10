@@ -6,10 +6,10 @@
 
 To properly run the API, you need to install the following pip packages:
 
-- py -m pip install Django
-- py -m pip install djangorestframework
-- py -m pip install django-rest-knox
-- py -m pip install django-cors-headers
+- pip install [Django](https://docs.djangoproject.com/en/1.8/howto/windows/#:~:text=Django%20can%20be%20installed%20easily,version%20in%20the%20command%20prompt.)
+- pip install [djangorestframework](https://www.django-rest-framework.org/)
+- pip install [django-rest-knox](https://james1345.github.io/django-rest-knox/installation/)
+- pip install [django-cors-headers](https://pypi.org/project/django-cors-headers/)
 
 ### To run the API, run the next command from the root directory of this repo:
 
