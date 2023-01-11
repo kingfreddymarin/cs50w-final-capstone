@@ -1,17 +1,22 @@
 # FINAL PROJECT - WOLFTECH FORUM
 
 # Distinctiveness and Complexity
-This project was developed with topics that were not introduced in CS50 Web Programming with Python and Javascript, but uses these technologies in an advanced manner to manipulate the data batween applications (backend and frontend). 
+This project was developed with topics that were introduced in CS50 Web Programming with Python and Javascript, but went ahead deeper in django and react  to use in an advanced manner the manipulation of data batween applications (backend and frontend). 
 
-This project is a forum for students, so they can be informed of topics related to technology such as web development, big data, data science etc. 
+This project is a forum for students, so they can be informed of topics related to technology such as web development, big data, data science etc. The student will choose their preffered topics in the profile section of the app.
 
 To access the main content of the forum you need to be registered, otherwise, you will only be able to access the login and signup forms.
 
-The website is like a social media but different. There's no interacion between users. You can access: 
+The website is like a social media but with a twist. There's no interacion between users, so there's no distractions from the objective of the forum, TO INFORM. 
+
+You can access: 
 - 'Home' where you will find all posts in the forum made by the admin (made by the default django admin site)
+  - As a student, you can like, dislike and comment on every post for every topic.
+  - One click away to filter by the topic you preffer.
 - 'My Feed' where you will find only posts that match the categories you already follow.
-- 'Community' where you will find access to the posting mechanism, aswell as posts made by other users. You won't know who published what, only on the comments you will be able to see who commented on the post. 
-- 'My profile' where you will be able to follow more categories aswell as view how many likes, dislikes and comments you've made throughout the application.
+  - same functionalities as in the "Home" tab but with filtered posts.  
+- 'Community' where you will find access to the student question posting mechanism, aswell as posts made by other users. You won't know who published what, only on the comments you will be able to see who commented on the post. 
+- 'My profile' where you will be able to follow categories aswell as view how many likes, dislikes and comments you've made throughout the application.
 - 'Log out' will log you out of your computer, aswell as from the database
 
 ### What do I mean? 
