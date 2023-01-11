@@ -29,14 +29,21 @@ const Comunity = ({ currentUser, categories, catArray, setCatArray }) => {
             content: e.target.elements.content.value,
             categories: catArray
         }
-        Axios.post('http://localhost:8000/new-post/', post)
-            .then(function (response) {
-                console.log(response);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-        console.log(post)
+        if (post.question && post.content && post.categories.length > 0) {
+            Axios.post('http://localhost:8000/new-post/', post)
+                .then(function (response) {
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        } else {
+            e.preventDefault()
+            alert(`question ${post.question.length}`)
+            alert(`content ${post.content.length}`)
+
+            alert('no blanks')
+        }
     }
 
     useEffect(() => {
