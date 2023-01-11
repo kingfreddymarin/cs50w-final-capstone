@@ -1,7 +1,10 @@
 // https://www.bootdey.com/snippets/view/profile-with-data-and-skills
+import { useState } from "react"
 import { useEffect } from "react"
+import CategoryFollow from "../containers/CategoryFollow"
 import "../styles/Profile.css"
-const Profile = ({ currentUser }) => {
+const Profile = ({ currentUser, categories, catArray, setCatArray }) => {
+    const [modal, setModal] = useState(false)
 
     const { email, first_name, last_name, likes, dislikes, comments, profile_data } = currentUser
     const { ctg_following } = profile_data
@@ -35,7 +38,7 @@ const Profile = ({ currentUser }) => {
                                     <h4>{dislikes.length}</h4>
                                     <h6>Dislikes</h6>
                                 </div>
-                                <div className="p-4 bg-dark text-center skill-block">
+                                <div onClick={() => setModal(!modal)} className="hover p-4 bg-dark text-center skill-block">
                                     <h4>{ctg_following.length}</h4>
                                     <h6>Categories</h6>
                                 </div>
@@ -44,6 +47,9 @@ const Profile = ({ currentUser }) => {
                     </div>
                 </div>
             </div>
+            {modal && (
+                <CategoryFollow categories={categories} currentUser={currentUser} />
+            )}
         </>
     );
 }

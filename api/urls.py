@@ -21,5 +21,8 @@ urlpatterns = [
     path('like/', views.like, name="like"),
     path('dislike/', views.dislike, name="dislike"),
     path('addComment/', views.addComment, name="addComment"),
-    path('new-post/', views.newPost, name="newPost")
+    path('new-post/', views.newPost, name="newPost"),
+    path('follow/', views.follow, name="follow"),
+    path('unfollow/', views.unfollow, name="unfollow")
+
 ]

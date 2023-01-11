@@ -9,14 +9,13 @@ import CategoryBox from "../containers/CategoryBox";
 import Axios from 'axios'
 
 
-const Comunity = ({ currentUser, categories }) => {
+const Comunity = ({ currentUser, categories, catArray, setCatArray }) => {
     const [posts, setPosts] = useState([])
     const [showComments, setShowComments] = useState(false)
     const [post, setPost] = useState([])
     const [activeFilter, setActiveFilter] = useState([])
     const [allPosts, setAllPosts] = useState([])
     const [filteredPosts] = useState([])
-    const [catArray, setCatArray] = useState([])
 
     const sortedPosts = posts.sort((a, b) => b.likes - a.likes);
 

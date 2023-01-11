@@ -15,6 +15,8 @@ function App() {
   const [isValid, setIsValid] = useState(null);
   const [loggedUser, setLoggedUser] = useState({});
   const [categories, setCategories] = useState([]);
+  const [catArray, setCatArray] = useState([])
+
   useEffect(() => {
     axios
       .get("http://localhost:8000/user/", {
@@ -56,9 +58,9 @@ function App() {
           />
           <Route
             path="/profile"
-            element={<Profile currentUser={loggedUser} />}
+            element={<Profile categories={categories} currentUser={loggedUser} catArray={catArray} setCatArray={setCatArray} />}
           />
-          <Route path="/comunity" element={<Community categories={categories} currentUser={loggedUser} />}></Route>
+          <Route path="/comunity" element={<Community categories={categories} currentUser={loggedUser} catArray={catArray} setCatArray={setCatArray} />}></Route>
           <Route path="/my-feed" element={<Feed categories={categories} currentUser={loggedUser} />}></Route>
           {/* <Route path="*" element={<NoPage />} /> */}
         </Route>
