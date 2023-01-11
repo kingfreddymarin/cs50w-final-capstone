@@ -5,13 +5,14 @@ import Axios from 'axios'
 
 
 
-const Following = ({ category, ctg_following, currentUser }) => {
+const Following = ({ category, ctg_following, currentUser, setLength, length }) => {
     const [array, setArray] = useState(ctg_following)
     const [fill, setFill] = useState(false)
 
     const handleCat = (category) => {
         if (array.indexOf(category.name) !== -1) {
             setArray(array.filter(cat => cat !== category.name))
+            setLength(length - 1)
             Axios.post('http://localhost:8000/unfollow/', { ...category, user: currentUser }).then(function (response) {
                 console.log("removed")
                 console.log(response)
@@ -20,6 +21,7 @@ const Following = ({ category, ctg_following, currentUser }) => {
             });
         } else {
             setArray([...array, category.name])
+            setLength(length + 1)
             Axios.post('http://localhost:8000/follow/', { ...category, user: currentUser }).then(function (response) {
                 console.log("added")
                 console.log(response)
@@ -36,7 +38,8 @@ const Following = ({ category, ctg_following, currentUser }) => {
         } else {
             setFill(false)
         }
-    }, [array, category])
+        console.log(array)
+    }, [array, category.name])
 
     return (
         <div onClick={() => handleCat(category)} className='hover justify-content-center' key={category.name} style={{ padding: "1em", border: "solid" }}>

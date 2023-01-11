@@ -1,14 +1,14 @@
 import React from 'react';
 import Following from '../components/Following';
 
-const CategoryFollow = ({ categories, currentUser }) => {
+const CategoryFollow = ({ categories, currentUser, setLength, length }) => {
     return (
-        <div className="card" style={{ width: "auto" }}>
+        <div className="card" style={{ width: "75vw", maxWidth: "700px" }}>
             <div className="card-body">
-                <p className='ml-1 mb-0'>All Categories</p>
+                <p className='ml-1 mb-0'>Categories available:</p>
                 {categories.map((category) => {
                     return (
-                        <Following key={category.name} currentUser={currentUser} ctg_following={currentUser.profile_data.ctg_following} categories={categories} category={category} />
+                        <Following key={category.name} setLength={setLength} length={length} currentUser={currentUser} ctg_following={currentUser.profile_data.ctg_following} categories={categories} category={category} />
                     )
                 })}
             </div>

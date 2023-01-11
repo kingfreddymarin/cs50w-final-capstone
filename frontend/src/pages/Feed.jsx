@@ -107,7 +107,7 @@ const Feed = ({ currentUser, categories }) => {
                             {sortedPosts.length === 0 && (
                                 <div className="mt-5">
                                     <h1>Woops!</h1>
-                                    <h4>You don't follow this category ;(</h4>
+                                    <h4>Go follow more categories! :D</h4>
                                 </div>
                             )}
                         </div>

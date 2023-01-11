@@ -8,11 +8,12 @@ const Profile = ({ currentUser, categories, catArray, setCatArray }) => {
 
     const { email, first_name, last_name, likes, dislikes, comments, profile_data } = currentUser
     const { ctg_following } = profile_data
+    const [length, setLength] = useState(ctg_following.length)
     useEffect(() => {
         console.log(ctg_following)
     }, [currentUser, ctg_following])
     return (
-        <>
+        <div className="d-flex flex-column align-items-center">
             <div className="container mt-5 mb-5">
                 <div className="row no-gutters">
                     <div className="col-md-4 col-lg-4"><img src="https://source.unsplash.com/random/500x500?sig=3" alt="rndm" /></div>
@@ -39,7 +40,7 @@ const Profile = ({ currentUser, categories, catArray, setCatArray }) => {
                                     <h6>Dislikes</h6>
                                 </div>
                                 <div onClick={() => setModal(!modal)} className="hover p-4 bg-dark text-center skill-block">
-                                    <h4>{ctg_following.length}</h4>
+                                    <h4>{length}</h4>
                                     <h6>Categories</h6>
                                 </div>
                             </div>
@@ -48,9 +49,9 @@ const Profile = ({ currentUser, categories, catArray, setCatArray }) => {
                 </div>
             </div>
             {modal && (
-                <CategoryFollow categories={categories} currentUser={currentUser} />
+                <CategoryFollow setLength={setLength} length={length} categories={categories} currentUser={currentUser} />
             )}
-        </>
+        </div>
     );
 }
 
