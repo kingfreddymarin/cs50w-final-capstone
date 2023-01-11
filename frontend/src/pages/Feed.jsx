@@ -105,7 +105,7 @@ const Feed = ({ currentUser, categories }) => {
                                 )
                             })}
                             {sortedPosts.length === 0 && (
-                                <div className="mt-5">
+                                <div className="ml-2 mt-5">
                                     <h1>Woops!</h1>
                                     <h4>Go follow more categories! :D</h4>
                                     <p>To follow more categories, go to My Profile > click(categories) and select your favorite topics</p>

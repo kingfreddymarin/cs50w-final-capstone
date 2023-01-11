@@ -91,7 +91,7 @@ const Home = ({ currentUser, categories }) => {
                         )
                      })}
                      {sortedPosts.length === 0 && (
-                        <div className="mt-5">
+                        <div className="ml-2 mt-5">
                            <h1>Woops!</h1>
                            <h4>Seems like there's no posts regarding this topic ;(</h4>
                         </div>

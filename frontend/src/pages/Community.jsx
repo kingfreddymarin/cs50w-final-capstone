@@ -17,8 +17,6 @@ const Comunity = ({ currentUser, categories, catArray, setCatArray }) => {
     const [allPosts, setAllPosts] = useState([])
     const [filteredPosts] = useState([])
 
-    const sortedPosts = posts.sort((a, b) => b.likes - a.likes);
-
     const creator = currentUser;
 
     const handleSubmit = (e) => {
@@ -30,18 +28,25 @@ const Comunity = ({ currentUser, categories, catArray, setCatArray }) => {
             categories: catArray
         }
         if (post.question && post.content && post.categories.length > 0) {
-            Axios.post('http://localhost:8000/new-post/', post)
-                .then(function (response) {
-                    console.log(response);
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
+            if (post.question.length > 99) {
+                e.preventDefault()
+                alert('Please be more concise with your question')
+            } else if (post.content.length > 999) {
+                e.preventDefault()
+                alert("there's a limit of 1000 characters per description")
+            } else {
+                e.preventDefault()
+                Axios.post('http://localhost:8000/new-post/', post)
+                    .then(function (response) {
+                        console.log(response);
+                        window.location.reload()
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }
         } else {
             e.preventDefault()
-            alert(`question ${post.question.length}`)
-            alert(`content ${post.content.length}`)
-
             alert('no blanks')
         }
     }
@@ -133,13 +138,13 @@ const Comunity = ({ currentUser, categories, catArray, setCatArray }) => {
                                     </div>
                                 </div>
                             </form>
-                            {sortedPosts.length > 0 && posts.map((post) => {
+                            {posts.length > 0 && posts.map((post) => {
                                 return (
                                     <Posts setPost={setPost} showCommets={showComments} setShowComments={setShowComments} currentUser={currentUser} key={post.id} post={post} />
                                 )
                             })}
-                            {sortedPosts.length === 0 && (
-                                <div className="mt-5">
+                            {posts.length === 0 && (
+                                <div className="ml-2 mt-5">
                                     <h1>Woops!</h1>
                                     <h4>Seems like there's no posts regarding this topic ;(</h4>
                                 </div>
