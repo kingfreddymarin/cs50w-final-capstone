@@ -1,0 +1,9 @@
+#post-container{
+    width: 90vw;
+}
+
+#cats{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}

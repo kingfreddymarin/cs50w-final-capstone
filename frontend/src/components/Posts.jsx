@@ -2,6 +2,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { FaThumbsDown, FaThumbsUp } from "react-icons/fa";
+import "../styles/Posts.css"
 import Axios from 'axios'
 
 
@@ -119,14 +120,14 @@ const Posts = ({ post, currentUser, setShowComments, setPost }) => {
     }, [currentPost, currentUser, likes, dislikes])
 
     return (
-        <div className="inner-main-body p-2 p-sm-3 forum-content show ">
+        <div style={{ maxWidth: "40rem" }} id='post-container' className="inner-main-body p-2 p-sm-3 forum-content show ">
             <div className="card mb-2" style={{ maxWidth: "40rem" }}>
                 <div className="card-body p-2 p-sm-3" >
                     <div className="d-flex flex-column" >
                         <div className="media-body">
                             <div className="">
                                 <h6 className="text-body">{title}</h6>
-                                <section className="category-conteiner d-flex">
+                                <section id="cats">
                                     {categories.map((category) => {
                                         return (
                                             <div key={category} >

@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import '../styles/Home.css'
+import '../styles/Create.css'
 import Posts from '../components/Posts'
 import Comments from "./Comments";
 import Filters from "../containers/Filters";
+import CategoryBox from "../containers/CategoryBox";
 
 import Axios from 'axios'
 
@@ -14,8 +16,29 @@ const Comunity = ({ currentUser, categories }) => {
     const [activeFilter, setActiveFilter] = useState([])
     const [allPosts, setAllPosts] = useState([])
     const [filteredPosts] = useState([])
+    const [catArray, setCatArray] = useState([])
 
     const sortedPosts = posts.sort((a, b) => b.likes - a.likes);
+
+    const creator = currentUser;
+
+    const handleSubmit = (e) => {
+        const post = {
+            isStudent: true,
+            creator: creator,
+            question: e.target.elements.question.value,
+            content: e.target.elements.content.value,
+            categories: catArray
+        }
+        Axios.post('http://localhost:8000/new-post/', post)
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        console.log(post)
+    }
 
     useEffect(() => {
         const fetchData = async () => {
@@ -70,8 +93,6 @@ const Comunity = ({ currentUser, categories }) => {
             })
             setPosts(array)
         }
-
-
     }, [activeFilter, allPosts, filteredPosts])
 
 
@@ -81,9 +102,31 @@ const Comunity = ({ currentUser, categories }) => {
                 {!showComments && (
                     <>
                         <Filters categories={categories} activeFilter={activeFilter} setActiveFilter={setActiveFilter}></Filters>
-                        <div className="inner-main d-flex flex-column align-items-center">
-                            <h1 className="ml-3 display-4">Welcome back, {currentUser.first_name}</h1>
-
+                        <div className="inner-main d-flex flex-column align-items-center ">
+                            <h1 className="ml-3 mt-3 display-4">Welcome back, {currentUser.first_name}</h1>
+                            <form onSubmit={handleSubmit} id="tweet-form">
+                                <div id="tweetbox" className="wrapper mb-5" >
+                                    <div className="input-box">
+                                        <h6> what's your question?</h6>
+                                        <input className="question mb-2" type="text" name="question" />
+                                        <CategoryBox catArray={catArray} setCatArray={setCatArray} categories={categories}></CategoryBox>
+                                        <h6> Detail your question!</h6>
+                                        <div className="tweet-area">
+                                            <textarea id="content"
+                                                required
+                                                name="content"
+                                                cols="30"
+                                                rows="10"
+                                            ></textarea>
+                                        </div>
+                                    </div>
+                                    <div className="bottom">
+                                        <div className="content">
+                                            <input className="btn btn-primary" value="post" type="submit" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                             {sortedPosts.length > 0 && posts.map((post) => {
                                 return (
                                     <Posts setPost={setPost} showCommets={showComments} setShowComments={setShowComments} currentUser={currentUser} key={post.id} post={post} />
@@ -97,11 +140,14 @@ const Comunity = ({ currentUser, categories }) => {
                             )}
                         </div>
                     </>
-                )}
-                {showComments && (
-                    <Comments currentUser={currentUser} currentPost={post} setShowComments={setShowComments} />
-                )}
-            </div>
+                )
+                }
+                {
+                    showComments && (
+                        <Comments currentUser={currentUser} currentPost={post} setShowComments={setShowComments} />
+                    )
+                }
+            </div >
         </>);
 }
 

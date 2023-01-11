@@ -241,6 +241,7 @@ def dislike(request):
         dislike.save()
     return Response(request.data)
 
+
 @api_view(["POST"])
 def addComment(request):
     data = request.data
@@ -262,3 +263,29 @@ def addComment(request):
     comment.save()
     return Response(request.data)
 
+
+@api_view(["POST"])
+def newPost(request):
+    data = request.data  # done
+    content = data["content"]  # done
+    title = data["question"]  # done
+    currentUser = data["creator"]
+    userId = currentUser["id"]
+    isStudent = data["isStudent"]  # done
+    postCat = data["categories"]  # done
+
+    user = User.objects.get(id=userId)  # done
+    profile = Profile.objects.get(user=user)
+
+    newPost = Post.objects.create(
+        isStudent=isStudent,
+        creator=profile,
+        title=title,
+        content=content
+    )
+    # done
+    for category in postCat:
+        dbcategory = Category.objects.get(pk=category["id"])
+        newPost.categories.add(dbcategory)
+
+    return Response(data)
