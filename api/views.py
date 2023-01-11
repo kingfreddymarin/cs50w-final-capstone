@@ -295,45 +295,27 @@ def newPost(request):
 def follow(request):
     category = request.data
     dbcategory = Category.objects.get(pk=category["id"])
+    currentUser = category["user"]
+    userId = currentUser["id"]
 
-    # postIm = data["post"]
-    # postId = postIm["id"]
-    # currentUser = data["profile"]
-    # userId = currentUser["id"]
-    # content = data["content"]
+    user = User.objects.get(id=userId)
+    profile = Profile.objects.get(user=user)
 
-    # user = User.objects.get(id=userId)
-    # post = Post.objects.get(id=postId)
-    # profile = Profile.objects.get(user=user)
-
-    # comment = Comment(
-    #     profile=profile,
-    #     post=post,
-    #     content=content
-    # )
-    # comment.save()
-    return Response(request.data)
+    profile.ctg_following.add(dbcategory)
+    dbcategory.followers.add(profile)
+    return Response(category)
 
 
 @api_view(["POST"])
 def unfollow(request):
     category = request.data
     dbcategory = Category.objects.get(pk=category["id"])
+    currentUser = category["user"]
+    userId = currentUser["id"]
 
-    # postIm = data["post"]
-    # postId = postIm["id"]
-    # currentUser = data["profile"]
-    # userId = currentUser["id"]
-    # content = data["content"]
+    user = User.objects.get(id=userId)
+    profile = Profile.objects.get(user=user)
 
-    # user = User.objects.get(id=userId)
-    # post = Post.objects.get(id=postId)
-    # profile = Profile.objects.get(user=user)
-
-    # comment = Comment(
-    #     profile=profile,
-    #     post=post,
-    #     content=content
-    # )
-    # comment.save()
+    profile.ctg_following.remove(dbcategory)
+    dbcategory.followers.remove(profile)
     return Response(request.data)
