@@ -71,7 +71,7 @@ Make and apply migrations:
 - py manage.py makemigrations
 - py manage.py migrate
 
-create a superuser to add posts as an admin:
+create a superuser to add posts as an admin through the (admin route)[http://localhost:8000/admin]:
 - py manage.py createsuperuser
 
 ### To run the API, run the next command from the root directory of this repo:
