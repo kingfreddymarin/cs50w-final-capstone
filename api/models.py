@@ -12,7 +12,7 @@ class User(AbstractUser):
 class Category(models.Model):
     name = models.CharField(max_length=280, default="")
     followers = models.ManyToManyField(
-        "Profile", related_name="profileFollowing", null=True, blank=True)
+        "Profile", related_name="profileFollowing", blank=True)
 
     def __str__(self):
         return str(self.name)
@@ -24,7 +24,7 @@ class Profile(models.Model):
     user = models.ForeignKey(
         "User", on_delete=models.CASCADE, related_name="userProfile", null=True, blank=True)
     ctg_following = models.ManyToManyField(
-        "Category", related_name="categoriesFollowing", null=True, blank=True)
+        "Category", related_name="categoriesFollowing", blank=True)
     isTeacher = models.BooleanField(default=False)
 
     def __str__(self):
@@ -39,7 +39,7 @@ class Post(models.Model):
     creator = models.ForeignKey(
         "Profile", on_delete=models.PROTECT, related_name="postCreator", null=True, blank=True)
     categories = models.ManyToManyField(
-        "Category", related_name="postCategories", null=True, blank=True)
+        "Category", related_name="postCategories", blank=True)
     title = models.CharField(max_length=100, default="")
     content = models.TextField(max_length=1000, default="")
     timestamp = models.DateTimeField(auto_now_add=True)
