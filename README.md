@@ -1,5 +1,8 @@
 # FINAL PROJECT - WOLFTECH FORUM
 
+CERTIFICATE OF COMPLETION:
+- https://certificates.cs50.io/aaaffd50-e5f2-4ebb-9ced-8b299be0c64f.pdf?size=letter
+
 # Distinctiveness and Complexity
 This project was developed with topics that were introduced in CS50 Web Programming with Python and Javascript, but went ahead deeper in django and react  to use in an advanced manner the manipulation of data batween applications (backend and frontend). 
 
