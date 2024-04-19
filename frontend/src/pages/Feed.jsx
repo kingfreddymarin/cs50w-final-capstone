@@ -108,7 +108,7 @@ const Feed = ({ currentUser, categories }) => {
                                 <div className="ml-2 mt-5">
                                     <h1>Woops!</h1>
                                     <h4>Go follow more categories! :D</h4>
-                                    <p>To follow more categories, go to My Profile > click(categories) and select your favorite topics</p>
+                                    <p>To follow more categories go to My Profile, click the "Categories" tab and select your favorite topics.</p>
                                 </div>
                             )}
                         </div>
