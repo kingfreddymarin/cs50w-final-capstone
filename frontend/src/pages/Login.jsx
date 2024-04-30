@@ -1,35 +1,36 @@
+import Axios from "axios";
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import Axios from 'axios';
+import { Link, useNavigate } from "react-router-dom";
 import { FaWolfPackBattalion } from "react-icons/fa";
 
-
 const Login = () => {
-   const [username, setUsername] = useState("")
-   const [password, setPassword] = useState("")
+   const navigate = useNavigate();
+   const [username, setUsername] = useState("");
+   const [password, setPassword] = useState("");
 
    const handleLogin = () => {
       console.log({
          username: username,
          password: password
-      })
+      });
       if (!username || !password) {
-         alert("No blanks!")
-         return
+         alert("No blanks!");
+         return;
       }
       Axios.post('http://localhost:8000/login/', {
          username: username,
          password: password
       }).then(function (response) {
-         const token = `Token ${response.data.token}`
-         window.localStorage.setItem("token", token)
-         window.localStorage.setItem("isLoggedIn", "true")
-         document.location.reload()
+         const token = `Token ${response.data.token}`;
+         window.localStorage.setItem("token", token);
+         window.localStorage.setItem("isLoggedIn", "true");
+         navigate('/'); // Redirect to home page after successful login
       }).catch(function (error) {
-         console.log(error)
-         error.response.data.non_field_errors ? alert(error.response.data.non_field_errors) : console.log('credentials are okay')
+         console.log(error);
+         error.response.data.non_field_errors ? alert(error.response.data.non_field_errors) : console.log('credentials are okay');
       });
-   }
+   };
+
    return (
       <section className="vh-100" style={{ backgroundColor: "#eee" }}>
          <div className="container h-100">
@@ -86,8 +87,7 @@ const Login = () => {
             </div>
          </div>
       </section>
-
    );
-}
+};
 
 export default Login;
