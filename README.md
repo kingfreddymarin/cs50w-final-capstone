@@ -1,4 +1,4 @@
-# FINAL PROJECT - WOLFTECH FORUM
+# FINAL PROJECT - CodeConnect FORUM
 
 CERTIFICATE OF COMPLETION:
 - https://certificates.cs50.io/aaaffd50-e5f2-4ebb-9ced-8b299be0c64f.pdf?size=letter

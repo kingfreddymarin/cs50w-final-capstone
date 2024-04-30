@@ -36,7 +36,7 @@ const Login = () => {
          <div className="container h-100">
             <div className="row d-flex justify-content-center align-items-center h-100">
                <div className="col-lg-12 col-xl-11">
-                  <p className="mt-5 mb-4 text-center text-secondary">Welcome to the Wolftech's Community Forum! If you're new here, we encourage you to sign up for an account so you can fully participate in the discussions and take advantage of all the features our community has to offer. If you already have an account, please sign in so you can easily access all of your saved content and customized settings. We look forward to seeing you around the forum and hearing your thoughts on all of the latest tech trends!
+                  <p className="mt-5 mb-4 text-center text-secondary">Welcome to the CodeConnect's Community Forum! If you're new here, we encourage you to sign up for an account so you can fully participate in the discussions and take advantage of all the features our community has to offer. If you already have an account, please sign in so you can easily access all of your saved content and customized settings. We look forward to seeing you around the forum and hearing your thoughts on all of the latest tech trends!
                   </p>
                   <div className="mt-2 mb-5 card text-black" style={{ borderRadius: "25px" }}>
                      <div className="card-body p-md-5">
@@ -45,7 +45,7 @@ const Login = () => {
                               <div className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4 d-flex align-items-center justify-content-center">Login |
                                  <div className="navbar-brand ml-1 mt-2" href="#">
                                     <FaWolfPackBattalion />
-                                    WOLFTECH
+                                    CODECONNECT
                                  </div>
                               </div>
                               <form className="mx-1 mx-md-4">

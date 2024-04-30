@@ -5,11 +5,13 @@ import Posts from '../components/Posts'
 import Comments from "./Comments";
 import Filters from "../containers/Filters";
 import CategoryBox from "../containers/CategoryBox";
+import Loader from "../components/Loader";
 
 import Axios from 'axios'
 
 
 const Comunity = ({ currentUser, categories, catArray, setCatArray }) => {
+    const [isLoading, setIsLoading] = useState(true)
     const [posts, setPosts] = useState([])
     const [showComments, setShowComments] = useState(false)
     const [post, setPost] = useState([])
@@ -71,6 +73,7 @@ const Comunity = ({ currentUser, categories, catArray, setCatArray }) => {
                                 }
                                 setPosts(newPost.isStudent ? posts => [...posts, newPost] : posts => [...posts])
                                 setAllPosts(newPost.isStudent ? posts => [...posts, newPost] : posts => [...posts])
+                                setIsLoading(false)
                             }).catch(function (error) {
                                 console.log(error)
                             });
@@ -83,6 +86,7 @@ const Comunity = ({ currentUser, categories, catArray, setCatArray }) => {
             }
         }
         fetchData()
+
     }, [currentUser])
 
     useEffect(() => {
@@ -143,7 +147,12 @@ const Comunity = ({ currentUser, categories, catArray, setCatArray }) => {
                                     <Posts setPost={setPost} showCommets={showComments} setShowComments={setShowComments} currentUser={currentUser} key={post.id} post={post} />
                                 )
                             })}
-                            {posts.length === 0 && (
+                            {isLoading && (
+                                <div className="ml-2 mt-5">
+                                    <Loader/>
+                                </div>
+                            )}
+                            {(posts.length === 0 && !isLoading) && (
                                 <div className="ml-2 mt-5">
                                     <h1>Woops!</h1>
                                     <h4>Seems like there's no posts regarding this topic ;(</h4>
