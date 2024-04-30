@@ -24,7 +24,7 @@ const Login = () => {
          const token = `Token ${response.data.token}`;
          window.localStorage.setItem("token", token);
          window.localStorage.setItem("isLoggedIn", "true");
-         navigate('/'); // Redirect to home page after successful login
+         window.location.href = "/" // Redirect to home page after successful login
       }).catch(function (error) {
          console.log(error);
          error.response.data.non_field_errors ? alert(error.response.data.non_field_errors) : console.log('credentials are okay');

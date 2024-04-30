@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { FaWolfPackBattalion } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios'
 
 const Register = () => {
+   const navigate = useNavigate();
    const [name, setName] = useState("")
    const [lastName, setLastName] = useState("")
    const [email, setEmail] = useState("")
@@ -29,7 +30,7 @@ const Register = () => {
       }).then(function (response) {
          const token = `Token ${response.data.token}`
          window.localStorage.setItem("token", token)
-         document.location.reload()
+         window.location.href = '/'
       }).catch(function (error) {
          console.log(error)
          error.response.data.username ? alert(error.response.data.username) : console.log("username passed")
@@ -103,7 +104,7 @@ const Register = () => {
                                     Already have an account?
                                  </div>
                                  <div className="d-flex justify-content-center  mb-3 mb-lg-4">
-                                    <Link to='/'>
+                                    <Link to='/login'>
                                        <button type="button" className="btn btn-dark btn-lg">Login</button>
                                     </Link>
                                  </div>

@@ -14,7 +14,7 @@ const Header = () => {
       }).then(function (response) {
          window.localStorage.removeItem("token");
          window.localStorage.removeItem("isLoggedIn");
-         navigate('/'); // Redirect to home page after logout
+         window.location.href = '/login';
       }).catch(function (error) {
          console.log(error);
       });
