@@ -2,6 +2,7 @@ from django.urls import path
 from knox import views as knox_views
 from . import views
 
+# This goes to vault
 urlpatterns = [
     path('register/', views.register, name='register'),
     path('login/', views.login, name='login'),
